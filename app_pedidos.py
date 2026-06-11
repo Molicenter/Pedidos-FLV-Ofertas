@@ -892,7 +892,7 @@ elif perfil_navegacao == "Visão das Lojas":
     df_loja = pd.merge(df_loja, df_est, on="Código", how="left")
     df_loja = pd.merge(df_loja, df_qtd, on="Código", how="left")
 
-    with st.container(border=True):
+   with st.container(border=True):
         st.info("💡 **Dica:** Preencha primeiro o **Estoque** e depois a **Qtde** do pedido.")
         
         col_cfg_loja = {
@@ -903,14 +903,12 @@ elif perfil_navegacao == "Visão das Lojas":
             "Qtde":           st.column_config.NumberColumn("🛒 Qtde", width=120, min_value=0, step=1)
         }
         
-        _, col_tabela, _ = st.columns([1, 4, 1])
-        
-        with col_tabela:
-            df_editado = st.data_editor(
-                df_loja, column_config=col_cfg_loja,
-                hide_index=True, use_container_width=True, height=520,
-                key=f"loja_editor_{st.session_state['reset_counter']}"
-            )
+        # Tabela ocupando 100% da largura do contêiner (sem as margens laterais)
+        df_editado = st.data_editor(
+            df_loja, column_config=col_cfg_loja,
+            hide_index=True, use_container_width=True, height=520,
+            key=f"loja_editor_{st.session_state['reset_counter']}"
+        )
 
         df_imprimir = df_editado.copy()
         df_imprimir["Código"] = df_imprimir["Código"].fillna(0).astype(int).astype(str)
