@@ -885,14 +885,14 @@ elif perfil_navegacao == "Visão das Lojas":
             st.session_state['usuario_logado'] = None
             st.rerun()
 
-    df_visiveis = df_produtos[df_produtos[loja_selecionada] == True]
+   df_visiveis = df_produtos[df_produtos[loja_selecionada] == True]
     df_loja = df_visiveis[["Código","Descrição","Tipo"]].copy()
     df_est = df_estoque[["Código", loja_selecionada]].rename(columns={loja_selecionada: "Estoque"})
     df_qtd = df_pedidos[["Código", loja_selecionada]].rename(columns={loja_selecionada: "Qtde"})
     df_loja = pd.merge(df_loja, df_est, on="Código", how="left")
     df_loja = pd.merge(df_loja, df_qtd, on="Código", how="left")
 
-   with st.container(border=True):
+    with st.container(border=True):
         st.info("💡 **Dica:** Preencha primeiro o **Estoque** e depois a **Qtde** do pedido.")
         
         col_cfg_loja = {
