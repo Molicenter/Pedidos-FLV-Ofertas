@@ -18,7 +18,7 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────
-# CSS GLOBAL E DE IMPRESSÃO
+# CSS GLOBAL E DE IMPRESSÃO (PALETA LARANJA)
 # ─────────────────────────────────────────────
 st.markdown("""
 <style>
@@ -28,18 +28,18 @@ st.markdown("""
     --bg-main:        #0d1117;
     --bg-card:        #161b22;
     --bg-sidebar:     #0d1117;
-    --green-dark:     #1a3a2a;
-    --green-mid:      #1f4d35;
-    --green-accent:   #2ea043;
-    --green-bright:   #3fb950;
-    --green-glow:     rgba(46,160,67,.25);
+    --orange-dark:    #3b1c0a;  /* Laranja bem escuro para fundos */
+    --orange-mid:     #96420b;  /* Laranja médio para botões e bordas */
+    --orange-accent:  #e65c00;  /* Laranja vibrante principal */
+    --orange-bright:  #ff7b1a;  /* Laranja claro para métricas e destaques */
+    --orange-glow:    rgba(230, 92, 0, 0.25);
     --text-primary:   #e6edf3;
     --text-muted:     #7d8590;
-    --text-header:    #cae8cb;
+    --text-header:    #ffddcc;  /* Texto claro com tom quente */
     --border:         #21262d;
-    --border-active:  #2ea043;
-    --row-hover:      rgba(46,160,67,.08);
-    --row-selected:   rgba(46,160,67,.18);
+    --border-active:  var(--orange-accent);
+    --row-hover:      rgba(230, 92, 0, 0.08);
+    --row-selected:   rgba(230, 92, 0, 0.18);
 }
 
 .stApp, .main { background-color: var(--bg-main) !important; color: var(--text-primary) !important; }
@@ -49,9 +49,9 @@ section[data-testid="stSidebar"] * { color: var(--text-primary) !important; }
 section[data-testid="stSidebar"] .stRadio label { font-size: 14px; }
 
 .stButton > button[kind="primary"] {
-    background: linear-gradient(135deg, var(--green-mid) 0%, var(--green-accent) 100%) !important;
+    background: linear-gradient(135deg, var(--orange-mid) 0%, var(--orange-accent) 100%) !important;
     color: #fff !important;
-    border: 1px solid var(--green-accent) !important;
+    border: 1px solid var(--orange-accent) !important;
     border-radius: 8px !important;
     font-weight: 700 !important;
     letter-spacing: .3px;
@@ -59,8 +59,8 @@ section[data-testid="stSidebar"] .stRadio label { font-size: 14px; }
 }
 .stButton > button[kind="primary"]:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 4px 18px var(--green-glow) !important;
-    border-color: var(--green-bright) !important;
+    box-shadow: 0 4px 18px var(--orange-glow) !important;
+    border-color: var(--orange-bright) !important;
 }
 .stButton > button {
     background: var(--bg-card) !important;
@@ -70,8 +70,8 @@ section[data-testid="stSidebar"] .stRadio label { font-size: 14px; }
     transition: all .2s ease !important;
 }
 .stButton > button:hover {
-    border-color: var(--green-accent) !important;
-    color: var(--green-bright) !important;
+    border-color: var(--orange-accent) !important;
+    color: var(--orange-bright) !important;
     transform: translateY(-1px) !important;
 }
 .stTextInput input, .stSelectbox > div > div {
@@ -81,28 +81,28 @@ section[data-testid="stSidebar"] .stRadio label { font-size: 14px; }
     color: var(--text-primary) !important;
 }
 .stTextInput input:focus, .stSelectbox > div > div:focus-within {
-    border-color: var(--green-accent) !important;
-    box-shadow: 0 0 0 3px var(--green-glow) !important;
+    border-color: var(--orange-accent) !important;
+    box-shadow: 0 0 0 3px var(--orange-glow) !important;
 }
 .title-input input {
     font-weight: 700 !important;
     font-size: 16px !important;
-    color: var(--green-bright) !important;
+    color: var(--orange-bright) !important;
     padding: 2px 8px !important;
     background: transparent !important;
     border: 1px dashed #21262d !important;
 }
-.title-input input:focus { border: 1px dashed #2ea043 !important; }
+.title-input input:focus { border: 1px dashed var(--orange-accent) !important; }
 
 [data-testid="stDataEditor"] [data-testid="glideDataEditor"] .gdg-header-cell,
 [data-testid="stDataEditor"] .dvn-stack .gdg-header {
-    background-color: var(--green-dark) !important;
+    background-color: var(--orange-dark) !important;
     color: var(--text-header) !important;
 }
 [data-testid="stDataEditor"] {
     border-radius: 10px !important;
     overflow: hidden;
-    border: 1px solid var(--green-mid) !important;
+    border: 1px solid var(--orange-mid) !important;
     box-shadow: 0 4px 20px rgba(0,0,0,.4);
     font-size: 12px !important; 
 }
@@ -110,7 +110,7 @@ section[data-testid="stSidebar"] .stRadio label { font-size: 14px; }
 [data-testid="stDataEditor"] .gdg-cell[data-state="focused"],
 [data-testid="stDataEditor"] .gdg-cell[aria-selected="true"] {
     background-color: var(--row-selected) !important;
-    outline: 2px solid var(--green-accent) !important;
+    outline: 2px solid var(--orange-accent) !important;
     outline-offset: -2px;
 }
 [data-testid="stDataEditor"] .gdg-row:hover .gdg-cell { background-color: var(--row-hover) !important; }
@@ -122,7 +122,7 @@ div[data-testid="stVerticalBlockBorderWrapper"] {
     transition: box-shadow .25s ease, border-color .25s ease;
 }
 div[data-testid="stVerticalBlockBorderWrapper"]:hover {
-    border-color: var(--green-mid) !important;
+    border-color: var(--orange-mid) !important;
     box-shadow: 0 6px 24px rgba(0,0,0,.35) !important;
 }
 [data-testid="stMetric"] {
@@ -131,7 +131,7 @@ div[data-testid="stVerticalBlockBorderWrapper"]:hover {
     border-radius: 10px;
     padding: 10px 10px;
 }
-[data-testid="stMetricValue"] { color: var(--green-bright) !important; font-weight: 700; font-size: 1.8rem !important; }
+[data-testid="stMetricValue"] { color: var(--orange-bright) !important; font-weight: 700; font-size: 1.8rem !important; }
 [data-testid="stMetricLabel"] { color: var(--text-muted) !important; }
 
 .sidebar-hidden section[data-testid="stSidebar"],
@@ -139,8 +139,8 @@ div[data-testid="stVerticalBlockBorderWrapper"]:hover {
 .sidebar-hidden .main .block-container { max-width: 100% !important; padding-left: 2rem !important; padding-right: 2rem !important; }
 
 .topbar-loja {
-    background: linear-gradient(90deg, var(--green-dark) 0%, #0d2018 100%);
-    border: 1px solid var(--green-mid);
+    background: linear-gradient(90deg, var(--orange-dark) 0%, #241005 100%);
+    border: 1px solid var(--orange-mid);
     border-radius: 10px;
     padding: 10px 18px;
     margin-bottom: 18px;
@@ -225,11 +225,176 @@ NOVOS_NOMES_LOJAS = ["291", "292", "293", "294", "295", "296", "297", "298"]
 MAPA_LOJAS = dict(zip(LOJAS, NOVOS_NOMES_LOJAS))
 FORNECEDORES_ESPECIAIS_LINHA = ["BANANA SANTOME", "MELANCIA CARLIN", "MELANCIA MARCINHO", "RODRIGO BATATA"]
 
-# (PRODUTOS INICIAIS OMITIDOS AQUI PARA NÃO FICAR GIGANTE, MAS MANTENHA A SUA LISTA NORMAL)
 produtos_iniciais = [
     {"Código": 1571, "Descrição": "Abacate Cx 20 Kg", "Tipo": "Box"},
     {"Código": 2614, "Descrição": "Abacaxi Doce Mel Cx c/7", "Tipo": "Box"},
-    # ... Coloque todos os seus produtos aqui, deixei resumido para focar na lógica
+    {"Código": 95, "Descrição": "Abacaxi Hawai Un", "Tipo": "Pedra"},
+    {"Código": 94, "Descrição": "Abacaxi Perola Un", "Tipo": "Box"},
+    {"Código": 232, "Descrição": "Abobora Cabotia 20 Kg", "Tipo": "Box"},
+    {"Código": 235, "Descrição": "Abobora Gigante Doce kg", "Tipo": "Box"},
+    {"Código": 236, "Descrição": "Abobora Italia Bdj", "Tipo": "Pedra"},
+    {"Código": 45, "Descrição": "Abobora Italia Cx 20 Kg", "Tipo": "Pedra"},
+    {"Código": 237, "Descrição": "Abobora Menina Bdj", "Tipo": "Pedra"},
+    {"Código": 56, "Descrição": "Abobora Menina Cx 20Kg", "Tipo": "Pedra"},
+    {"Código": 238, "Descrição": "Abobora Moranga Saco 20kg", "Tipo": "Box"},
+    {"Código": 240, "Descrição": "Abobora Paulista Verde cx 22Kg", "Tipo": "Pedra"},
+    {"Código": 85, "Descrição": "Acelga Cx c/8", "Tipo": "Pedra"},
+    {"Código": 1746, "Descrição": "Alface Americana unid", "Tipo": "Pedra"},
+    {"Código": 9001, "Descrição": "Alho Nacional Cx 10Kg", "Tipo": "Box"},
+    {"Código": 320, "Descrição": "Alho Poro dz", "Tipo": "Box"},
+    {"Código": 894, "Descrição": "Ameixa Importada Cx 9Kg", "Tipo": "Box"},
+    {"Código": 9002, "Descrição": "Ameixa Nacional", "Tipo": "Box"},
+    {"Código": 504, "Descrição": "Amendoim sc 10Kg", "Tipo": "Box"},
+    {"Código": 113, "Descrição": "Aspargos", "Tipo": "Box"},
+    {"Código": 896, "Descrição": "Atemoia Cx 4Kg", "Tipo": "Box"},
+    {"Código": 897, "Descrição": "Avocado Cx 10Kg", "Tipo": "Box"},
+    {"Código": 2567, "Descrição": "Banana Maça Cx", "Tipo": "Pedra"},
+    {"Código": 2568, "Descrição": "Banana Nanica Cx", "Tipo": "Pedra"},
+    {"Código": 2569, "Descrição": "Banana Prata Cx", "Tipo": "Pedra"},
+    {"Código": 98, "Descrição": "Banana Terra Cx 20Kg", "Tipo": "Box"},
+    {"Código": 551, "Descrição": "Batata Asterix Saq 25Kg", "Tipo": "Pedra"},
+    {"Código": 73, "Descrição": "Batata Doce Branca Cx 22Kg", "Tipo": "Pedra"},
+    {"Código": 60, "Descrição": "Batata Doce Cx 22Kg", "Tipo": "Pedra"},
+    {"Código": 508, "Descrição": "Batata kg Saq 25Kg", "Tipo": "Pedra"},
+    {"Código": 26, "Descrição": "Batata Yacom Kg", "Tipo": "Box"},
+    {"Código": 61, "Descrição": "Berinjela Cx 13Kg", "Tipo": "Pedra"},
+    {"Código": 2732, "Descrição": "Berinjela Japonesa Bdja", "Tipo": "Pedra"},
+    {"Código": 62, "Descrição": "Berinjela Japonesa Cx 13Kg", "Tipo": "Pedra"},
+    {"Código": 256, "Descrição": "Beterraba Cx 21kg", "Tipo": "Pedra"},
+    {"Código": 64, "Descrição": "Brocolis Chines BDJ", "Tipo": "Box"},
+    {"Código": 707, "Descrição": "Cabotia 300g Bjda Descascada", "Tipo": "Pedra"},
+    {"Código": 28, "Descrição": "Caju bandeija cx c/4", "Tipo": "Box"},
+    {"Código": 9003, "Descrição": "Caqui Fuyu cx 20Kg", "Tipo": "Box"},
+    {"Código": 9004, "Descrição": "Caqui Kioto / Chocolate cx 20Kg", "Tipo": "Box"},
+    {"Código": 264, "Descrição": "Caqui Rama Forte Cx 5Kg", "Tipo": "Box"},
+    {"Código": 69, "Descrição": "Cara Cx 22Kg", "Tipo": "Pedra"},
+    {"Código": 127, "Descrição": "Carambola bandeija cx c/4", "Tipo": "Box"},
+    {"Código": 74, "Descrição": "Caxi Cx 20Kg", "Tipo": "Pedra"},
+    {"Código": 2730, "Descrição": "Cebola Branca Bdja", "Tipo": "Pedra"},
+    {"Código": 9000, "Descrição": "Cebola cx 3 Saco 20Kg", "Tipo": "Box"},
+    {"Código": 43, "Descrição": "Cebola Roxa Saco 20Kg", "Tipo": "Box"},
+    {"Código": 17, "Descrição": "Cenoura Baby un", "Tipo": "Box"},
+    {"Código": 267, "Descrição": "Cenoura Cx 21kg", "Tipo": "Pedra"},
+    {"Código": 19, "Descrição": "Champignon Paris 250G un", "Tipo": "Box"},
+    {"Código": 902, "Descrição": "Chuchu Cx 20Kg", "Tipo": "Box"},
+    {"Código": 1555, "Descrição": "Cidra Ralada Pré Cozid Un", "Tipo": "Box"},
+    {"Código": 21, "Descrição": "Coco Seco Cx 18Kg", "Tipo": "Box"},
+    {"Código": 1700, "Descrição": "Coco Verde saco c/10", "Tipo": "Box"},
+    {"Código": 87, "Descrição": "Couve Flor Bdj", "Tipo": "Box"},
+    {"Código": 86, "Descrição": "Couve Flor dz", "Tipo": "Pedra"},
+    {"Código": 108, "Descrição": "Ervilha em Grãos Bdja", "Tipo": "Pedra"},
+    {"Código": 109, "Descrição": "Ervilha Horta Torta Bdj", "Tipo": "Pedra"},
+    {"Código": 279, "Descrição": "Figo Pre Cozido un", "Tipo": "Box"},
+    {"Código": 128, "Descrição": "Figo Roxo bandeija cx c/3un", "Tipo": "Box"},
+    {"Código": 712, "Descrição": "Gengibre Cx 12Kg", "Tipo": "Box"},
+    {"Código": 281, "Descrição": "Gobo Un", "Tipo": "Box"},
+    {"Código": 59, "Descrição": "Goiaba Cx 20Kg", "Tipo": "Box"},
+    {"Código": 1662, "Descrição": "Inhame Cx 22kg", "Tipo": "Pedra"},
+    {"Código": 42, "Descrição": "Jilo Bdj", "Tipo": "Pedra"},
+    {"Código": 41, "Descrição": "Jilo Cx 15Kg", "Tipo": "Pedra"},
+    {"Código": 112, "Descrição": "Kiwi 500g Bdj", "Tipo": "Box"},
+    {"Código": 904, "Descrição": "Kiwi Importado Cx t23 cx 9Kg", "Tipo": "Box"},
+    {"Código": 1651, "Descrição": "Laranja Bahia Cx 18Kg", "Tipo": "Box"},
+    {"Código": 1599, "Descrição": "Laranja Bahia importada Cx 15Kg", "Tipo": "Box"},
+    {"Código": 1307, "Descrição": "Laranja Lima Cx 18Kg", "Tipo": "Box"},
+    {"Código": 9005, "Descrição": "Laranja Lima PC 1,5KG", "Tipo": "Pedra"},
+    {"Código": 1516, "Descrição": "Laranja P/ Suco Cx 20Kg", "Tipo": "Pedra"},
+    {"Código": 53, "Descrição": "Laranja Pera Cx 20Kg", "Tipo": "Pedra"},
+    {"Código": 9006, "Descrição": "Laranja Pera PC 3 KG", "Tipo": "Pedra"},
+    {"Código": 288, "Descrição": "Laranja Pre Cozida un", "Tipo": "Box"},
+    {"Código": 13, "Descrição": "Lima Da Persia Cx 10Kg", "Tipo": "Box"},
+    {"Código": 44, "Descrição": "Limao Cx 22kg 22Kg", "Tipo": "Box"},
+    {"Código": 581, "Descrição": "Limão Rosa Bdja", "Tipo": "Pedra"},
+    {"Código": 91, "Descrição": "Limao Rosa Cx 20Kg", "Tipo": "Pedra"},
+    {"Código": 522, "Descrição": "Limao Siciliano Cx 15Kg", "Tipo": "Box"},
+    {"Código": 291, "Descrição": "Maça Argentina Cx 18Kg", "Tipo": "Box"},
+    {"Código": 9007, "Descrição": "Maça Fuji Cx 18Kg", "Tipo": "Box"},
+    {"Código": 9008, "Descrição": "Maça Gala Cx 18Kg", "Tipo": "Box"},
+    {"Código": 1697, "Descrição": "Maça Gransmith Cx 1/2 9Kg", "Tipo": "Box"},
+    {"Código": 1652, "Descrição": "Maça Pacote 1kg diversos cx 18un", "Tipo": "Box"},
+    {"Código": 2052, "Descrição": "Maça Pink Lady Cx 18Kg", "Tipo": "Box"},
+    {"Código": 106, "Descrição": "Mamao Formosa Cx 10Kg", "Tipo": "Box"},
+    {"Código": 3, "Descrição": "Mamao Papaya Cx 10kg 15un", "Tipo": "Box"},
+    {"Código": 75, "Descrição": "Mandioca Desc 1Kg", "Tipo": "Pedra"},
+    {"Código": 78, "Descrição": "Mandioca Salsa Bdj", "Tipo": "Pedra"},
+    {"Código": 76, "Descrição": "Mandioca Salsa Cx 10Kg", "Tipo": "Pedra"},
+    {"Código": 406, "Descrição": "Manga Espada 6Kg", "Tipo": "Box"},
+    {"Código": 6, "Descrição": "Manga Palmer Cx 18Kg", "Tipo": "Box"},
+    {"Código": 130, "Descrição": "Manga Rosa 18Kg", "Tipo": "Box"},
+    {"Código": 908, "Descrição": "Manga Tomy Cx 19kg", "Tipo": "Box"},
+    {"Código": 92, "Descrição": "Maracuja Azedo Cx 10Kg", "Tipo": "Box"},
+    {"Código": 1646, "Descrição": "Maracuja Doce Cx Plastica 10Kg", "Tipo": "Box"},
+    {"Código": 518, "Descrição": "Maxi Pecan 250G un", "Tipo": "Box"},
+    {"Código": 546, "Descrição": "Maxixe Bandeja 300g", "Tipo": "Pedra"},
+    {"Código": 3003, "Descrição": "Melancia Amarela", "Tipo": "Pedra"},
+    {"Código": 673, "Descrição": "Melancia Baby Cx 14Kg", "Tipo": "Box"},
+    {"Código": 2, "Descrição": "Melancia Favo de Mel", "Tipo": "Pedra"},
+    {"Código": 1, "Descrição": "Melancia Un", "Tipo": "Pedra"},
+    {"Código": 9009, "Descrição": "Melão Amarelo Gaia Cx 13kg", "Tipo": "Box"},
+    {"Código": 1409, "Descrição": "Melão Bebezinho", "Tipo": "Box"},
+    {"Código": 198, "Descrição": "Melao Cantalupe Cx 10Kg", "Tipo": "Box"},
+    {"Código": 412, "Descrição": "Melao Cepi Amarelo Cx 10Kg", "Tipo": "Box"},
+    {"Código": 200, "Descrição": "Melao Dino Cx 10Kg", "Tipo": "Box"},
+    {"Código": 202, "Descrição": "Melao Galia Cx 10Kg", "Tipo": "Box"},
+    {"Código": 1407, "Descrição": "Melao Orange Cx 6Kg", "Tipo": "Box"},
+    {"Código": 424, "Descrição": "Melao Rei Cx 10Kg", "Tipo": "Box"},
+    {"Código": 206, "Descrição": "Melao Rei Sapo Cx 10Kg", "Tipo": "Box"},
+    {"Código": 915, "Descrição": "Melao Sapo Cx 13Kg", "Tipo": "Box"},
+    {"Código": 477, "Descrição": "Mexerica cx 20kg", "Tipo": "Box"},
+    {"Código": 72, "Descrição": "Milho Verde Bdj", "Tipo": "Pedra"},
+    {"Código": 20, "Descrição": "Mirtilo cx c/12", "Tipo": "Box"},
+    {"Código": 58, "Descrição": "Moranguinho Bdj cx c/4", "Tipo": "Pedra"},
+    {"Código": 536, "Descrição": "Moricote Ole cx 18Kg", "Tipo": "Box"},
+    {"Código": 209, "Descrição": "Moyashi un", "Tipo": "Box"},
+    {"Código": 79, "Descrição": "Nabo maco c/6", "Tipo": "Pedra"},
+    {"Código": 916, "Descrição": "Nectarina importada 9Kg", "Tipo": "Box"},
+    {"Código": 22, "Descrição": "Nespera Bdj c/4", "Tipo": "Box"},
+    {"Código": 57, "Descrição": "Pepino Caipira Cx 20Kg", "Tipo": "Pedra"},
+    {"Código": 46, "Descrição": "Pepino Fuchinari Cx 20Kg", "Tipo": "Pedra"},
+    {"Código": 2009, "Descrição": "Pera Argentina cx 18Kg", "Tipo": "Box"},
+    {"Código": 118, "Descrição": "Pera asiatica ou Hossui cx 9Kg", "Tipo": "Box"},
+    {"Código": 119, "Descrição": "Pera Erconini 1kg bdj cx c/10", "Tipo": "Box"},
+    {"Código": 1431, "Descrição": "Pera Nacional cx 20Kg", "Tipo": "Box"},
+    {"Código": 1600, "Descrição": "Pera Portuguesa bdj", "Tipo": "Box"},
+    {"Código": 121, "Descrição": "Pera Portuguesa Cx 9Kg", "Tipo": "Box"},
+    {"Código": 4, "Descrição": "Pera Red Cx 18Kg", "Tipo": "Box"},
+    {"Código": 891, "Descrição": "Pessego importado cx 9Kg", "Tipo": "Box"},
+    {"Código": 537, "Descrição": "Physalis cx c/8", "Tipo": "Box"},
+    {"Código": 52, "Descrição": "Pimenta Americana Cx 10Kg", "Tipo": "Pedra"},
+    {"Código": 80, "Descrição": "Pimenta Biquinho Bdj", "Tipo": "Pedra"},
+    {"Código": 83, "Descrição": "Pimenta Gode Bdj", "Tipo": "Pedra"},
+    {"Código": 540, "Descrição": "Pimenta Vermelha Bdj", "Tipo": "Pedra"},
+    {"Código": 47, "Descrição": "Pimentao Amarelo Cx 10Kg", "Tipo": "Pedra"},
+    {"Código": 949, "Descrição": "Pimentão Misto Bdj", "Tipo": "Pedra"},
+    {"Código": 49, "Descrição": "Pimentao Verde Cx 10Kg", "Tipo": "Pedra"},
+    {"Código": 48, "Descrição": "Pimentao Vermelho Cx 10Kg", "Tipo": "Pedra"},
+    {"Código": 138, "Descrição": "Pinha cx 4,5kg", "Tipo": "Box"},
+    {"Código": 498, "Descrição": "Pinhao saq 10Kg", "Tipo": "Box"},
+    {"Código": 139, "Descrição": "Pitaia Cx 10kg", "Tipo": "Box"},
+    {"Código": 1486, "Descrição": "Poncan cx 20Kg", "Tipo": "Box"},
+    {"Código": 40, "Descrição": "Quiabo Bdj", "Tipo": "Pedra"},
+    {"Código": 110, "Descrição": "Rabanete Bdj", "Tipo": "Pedra"},
+    {"Código": 2886, "Descrição": "Rabanete Maco Dz 12un", "Tipo": "Pedra"},
+    {"Código": 88, "Descrição": "Repolho dz 12un", "Tipo": "Pedra"},
+    {"Código": 84, "Descrição": "Repolho Manteiga Bj dz 12un", "Tipo": "Pedra"},
+    {"Código": 140, "Descrição": "Repolho Roxo Dz 12un", "Tipo": "Pedra"},
+    {"Código": 16, "Descrição": "Roma cx 4,5kg", "Tipo": "Box"},
+    {"Código": 31, "Descrição": "Salsao un", "Tipo": "Box"},
+    {"Código": 32, "Descrição": "Shimeji Branco un", "Tipo": "Box"},
+    {"Código": 679, "Descrição": "Shimeji Preto un", "Tipo": "Box"},
+    {"Código": 33, "Descrição": "Shitake un", "Tipo": "Box"},
+    {"Código": 10, "Descrição": "Tamara Bandeija Palito Un", "Tipo": "Box"},
+    {"Código": 23, "Descrição": "Tamarindo bdj cx c/4", "Tipo": "Box"},
+    {"Código": 364, "Descrição": "Tofu un", "Tipo": "Box"},
+    {"Código": 39, "Descrição": "Tomate Saladete Cx 22Kg", "Tipo": "Pedra"},
+    {"Código": 51, "Descrição": "Tomate Sweet Grape un", "Tipo": "Box"},
+    {"Código": 538, "Descrição": "Tomatinho Bdj Naranti", "Tipo": "Pedra"},
+    {"Código": 147, "Descrição": "Tomatinho cocktail holandez cx 6Kg", "Tipo": "Box"},
+    {"Código": 100, "Descrição": "Uva Niagara Bdja cx c/10", "Tipo": "Box"},
+    {"Código": 9010, "Descrição": "Uva Preta 500g Bdja cx c/10", "Tipo": "Box"},
+    {"Código": 9011, "Descrição": "Uva Preta Benetaka Bdja cx c/10", "Tipo": "Box"},
+    {"Código": 9012, "Descrição": "Uva Verde 500g Bdja cx c/10", "Tipo": "Box"},
+    {"Código": 9013, "Descrição": "Uva Vermelha 500g Bdja cx c/10", "Tipo": "Box"},
     {"Código": 68, "Descrição": "Vagem Bdj", "Tipo": "Pedra"},
     {"Código": 67, "Descrição": "Vagem kg Cx 11kg", "Tipo": "Pedra"}
 ]
@@ -609,7 +774,7 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
 # ─────────────────────────────────────────────
 if perfil_navegacao == "Separação e Fechamento":
     st.markdown("""
-    <div class="page-header" style="background: linear-gradient(90deg, var(--green-dark) 0%, #0d2018 100%); padding: 14px 20px; border-radius: 10px; margin-bottom: 22px;">
+    <div class="page-header" style="background: linear-gradient(90deg, var(--orange-dark) 0%, #241005 100%); padding: 14px 20px; border-radius: 10px; margin-bottom: 22px;">
         <span style="font-size: 26px; margin-right: 12px;">📊</span>
         <div style="display: inline-block; vertical-align: top;">
             <div style="font-size: 20px; font-weight: 700; color: var(--text-header);">Separação e Fechamento</div>
@@ -807,7 +972,7 @@ elif perfil_navegacao == "Visão das Lojas":
 # ─────────────────────────────────────────────
 elif perfil_navegacao == "Visão Fornecedores (Ademilto)":
     st.markdown("""
-    <div class="page-header" style="background: linear-gradient(90deg, var(--green-dark) 0%, #0d2018 100%); padding: 14px 20px; border-radius: 10px; margin-bottom: 22px;">
+    <div class="page-header" style="background: linear-gradient(90deg, var(--orange-dark) 0%, #241005 100%); padding: 14px 20px; border-radius: 10px; margin-bottom: 22px;">
         <span style="font-size: 26px; margin-right: 12px;">🚚</span>
         <div style="display: inline-block; vertical-align: top;">
             <div style="font-size: 20px; font-weight: 700; color: var(--text-header);">Visão Fornecedores (Ademilto) - Modo de Edição Livre</div>
@@ -900,7 +1065,7 @@ elif perfil_navegacao == "Visão Fornecedores (Ademilto)":
                         soma_dinamica = (pd.to_numeric(df_forn_edit["Total"], errors='coerce').fillna(0) * pd.to_numeric(df_forn_edit["R$ Preço"], errors='coerce').fillna(0)).sum()
                         
                         st.markdown(f"""
-                            <div style="text-align:right; font-weight:700; margin-top:8px; color:var(--green-bright); font-size:16px;">
+                            <div style="text-align:right; font-weight:700; margin-top:8px; color:var(--orange-bright); font-size:16px;">
                                 Total Final: R$ {soma_dinamica:,.2f}
                             </div>
                         """, unsafe_allow_html=True)
@@ -911,7 +1076,7 @@ elif perfil_navegacao == "Visão Fornecedores (Ademilto)":
 # ─────────────────────────────────────────────
 elif perfil_navegacao == "Catálogo de Produtos":
     st.markdown("""
-    <div class="page-header" style="background: linear-gradient(90deg, var(--green-dark) 0%, #0d2018 100%); padding: 14px 20px; border-radius: 10px; margin-bottom: 22px;">
+    <div class="page-header" style="background: linear-gradient(90deg, var(--orange-dark) 0%, #241005 100%); padding: 14px 20px; border-radius: 10px; margin-bottom: 22px;">
         <span style="font-size: 26px; margin-right: 12px;">🏷️</span>
         <div style="display: inline-block; vertical-align: top;">
             <div style="font-size: 20px; font-weight: 700; color: var(--text-header);">Catálogo de Produtos</div>
