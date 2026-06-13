@@ -1098,7 +1098,7 @@ elif perfil_navegacao == "Catálogo de Produtos":
                 try:
                     conn_pg = st.connection("banco_erp", type="sql")
                     
-                    query_90d = "SELECT loja, codigo, qtde FROM python_90dSEGTER"
+                    query_90d = 'SELECT loja, codigo, qtde FROM "python_90dSEGTER"'
                     
                     df_nova_media = conn_pg.query(query_90d, ttl=0) # Força rodar na hora
                     
