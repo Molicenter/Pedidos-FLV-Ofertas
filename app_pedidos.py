@@ -152,11 +152,11 @@ div[data-testid="stVerticalBlockBorderWrapper"]:hover {
 .topbar-title { font-size: 18px; font-weight: 700; color: var(--text-header); }
 .topbar-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
-/* REGRAS DE IMPRESSÃO - FORÇANDO A TELA BRANCA E AS TABELAS */
+/* REGRAS DE IMPRESSÃO GLOBAIS - FORÇANDO PAISAGEM (LANDSCAPE) E REMOVENDO ESPAÇOS BRANCOS */
 @media print {
     @page { 
         margin: 5mm 5mm; 
-        size: A4 portrait; 
+        size: landscape; 
     }
     .stApp, .main, body, html {
         background-color: #ffffff !important;
@@ -168,11 +168,19 @@ div[data-testid="stVerticalBlockBorderWrapper"]:hover {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
+    
+    /* Remove os espaços gigantes no topo do Streamlit */
+    div[class^="block-container"], .block-container {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        margin-top: 0 !important;
+        max-width: 100% !important;
+    }
+
     header, [data-testid="stSidebar"], [data-testid="stHeader"] { 
         display: none !important; 
     }
     
-    /* DESLIGA TUDO O QUE FOR DO STREAMLIT NA TELA */
     [data-testid="stElementContainer"],
     [data-testid="stHorizontalBlock"],
     div[data-testid="stVerticalBlockBorderWrapper"],
@@ -181,13 +189,11 @@ div[data-testid="stVerticalBlockBorderWrapper"]:hover {
         display: none !important;
     }
     
-    /* RELIGA APENAS A CAIXA QUE CONTÉM O PRINT-SECTION */
     [data-testid="stElementContainer"]:has(#print-section) {
         display: block !important;
         width: 100% !important;
     }
     
-    /* FORMATAÇÃO DO PAPEL */
     #print-section {
         display: block !important;
         width: 100% !important;
@@ -211,7 +217,6 @@ div[data-testid="stVerticalBlockBorderWrapper"]:hover {
         gap: 10px !important; 
     }
     
-    /* FORÇANDO A LARGURA EXATA DAS TABELAS PARA NÃO ENCOLHER */
     .print-col {
         width: 49% !important; 
         flex: 0 0 49% !important;
@@ -266,177 +271,177 @@ MAPA_LOJAS = dict(zip(LOJAS, NOVOS_NOMES_LOJAS))
 FORNECEDORES_ESPECIAIS_LINHA = ["BANANA SANTOME", "MELANCIA CARLIN", "MELANCIA MARCINHO", "RODRIGO BATATA"]
 
 produtos_iniciais = [
-    {"Código": 1571, "Descrição": "Abacate Cx 20 Kg", "Tipo": "Box"},
-    {"Código": 2614, "Descrição": "Abacaxi Doce Mel Cx c/7", "Tipo": "Box"},
-    {"Código": 95, "Descrição": "Abacaxi Hawai Un", "Tipo": "Pedra"},
-    {"Código": 94, "Descrição": "Abacaxi Perola Un", "Tipo": "Box"},
-    {"Código": 232, "Descrição": "Abobora Cabotia 20 Kg", "Tipo": "Box"},
-    {"Código": 235, "Descrição": "Abobora Gigante Doce kg", "Tipo": "Box"},
-    {"Código": 236, "Descrição": "Abobora Italia Bdj", "Tipo": "Pedra"},
-    {"Código": 45, "Descrição": "Abobora Italia Cx 20 Kg", "Tipo": "Pedra"},
-    {"Código": 237, "Descrição": "Abobora Menina Bdj", "Tipo": "Pedra"},
-    {"Código": 56, "Descrição": "Abobora Menina Cx 20Kg", "Tipo": "Pedra"},
-    {"Código": 238, "Descrição": "Abobora Moranga Saco 20kg", "Tipo": "Box"},
-    {"Código": 240, "Descrição": "Abobora Paulista Verde cx 22Kg", "Tipo": "Pedra"},
-    {"Código": 85, "Descrição": "Acelga Cx c/8", "Tipo": "Pedra"},
-    {"Código": 1746, "Descrição": "Alface Americana unid", "Tipo": "Pedra"},
-    {"Código": 9001, "Descrição": "Alho Nacional Cx 10Kg", "Tipo": "Box"},
-    {"Código": 320, "Descrição": "Alho Poro dz", "Tipo": "Box"},
-    {"Código": 894, "Descrição": "Ameixa Importada Cx 9Kg", "Tipo": "Box"},
-    {"Código": 9002, "Descrição": "Ameixa Nacional", "Tipo": "Box"},
-    {"Código": 504, "Descrição": "Amendoim sc 10Kg", "Tipo": "Box"},
-    {"Código": 113, "Descrição": "Aspargos", "Tipo": "Box"},
-    {"Código": 896, "Descrição": "Atemoia Cx 4Kg", "Tipo": "Box"},
-    {"Código": 897, "Descrição": "Avocado Cx 10Kg", "Tipo": "Box"},
-    {"Código": 2567, "Descrição": "Banana Maça Cx", "Tipo": "Pedra"},
-    {"Código": 2568, "Descrição": "Banana Nanica Cx", "Tipo": "Pedra"},
-    {"Código": 2569, "Descrição": "Banana Prata Cx", "Tipo": "Pedra"},
-    {"Código": 98, "Descrição": "Banana Terra Cx 20Kg", "Tipo": "Box"},
-    {"Código": 551, "Descrição": "Batata Asterix Saq 25Kg", "Tipo": "Pedra"},
-    {"Código": 73, "Descrição": "Batata Doce Branca Cx 22Kg", "Tipo": "Pedra"},
-    {"Código": 60, "Descrição": "Batata Doce Cx 22Kg", "Tipo": "Pedra"},
-    {"Código": 508, "Descrição": "Batata kg Saq 25Kg", "Tipo": "Pedra"},
-    {"Código": 26, "Descrição": "Batata Yacom Kg", "Tipo": "Box"},
-    {"Código": 61, "Descrição": "Berinjela Cx 13Kg", "Tipo": "Pedra"},
-    {"Código": 2732, "Descrição": "Berinjela Japonesa Bdja", "Tipo": "Pedra"},
-    {"Código": 62, "Descrição": "Berinjela Japonesa Cx 13Kg", "Tipo": "Pedra"},
-    {"Código": 256, "Descrição": "Beterraba Cx 21kg", "Tipo": "Pedra"},
-    {"Código": 64, "Descrição": "Brocolis Chines BDJ", "Tipo": "Box"},
-    {"Código": 707, "Descrição": "Cabotia 300g Bjda Descascada", "Tipo": "Pedra"},
-    {"Código": 28, "Descrição": "Caju bandeija cx c/4", "Tipo": "Box"},
-    {"Código": 9003, "Descrição": "Caqui Fuyu cx 20Kg", "Tipo": "Box"},
-    {"Código": 9004, "Descrição": "Caqui Kioto / Chocolate cx 20Kg", "Tipo": "Box"},
-    {"Código": 264, "Descrição": "Caqui Rama Forte Cx 5Kg", "Tipo": "Box"},
-    {"Código": 69, "Descrição": "Cara Cx 22Kg", "Tipo": "Pedra"},
-    {"Código": 127, "Descrição": "Carambola bandeija cx c/4", "Tipo": "Box"},
-    {"Código": 74, "Descrição": "Caxi Cx 20Kg", "Tipo": "Pedra"},
-    {"Código": 2730, "Descrição": "Cebola Branca Bdja", "Tipo": "Pedra"},
-    {"Código": 9000, "Descrição": "Cebola cx 3 Saco 20Kg", "Tipo": "Box"},
-    {"Código": 43, "Descrição": "Cebola Roxa Saco 20Kg", "Tipo": "Box"},
-    {"Código": 17, "Descrição": "Cenoura Baby un", "Tipo": "Box"},
-    {"Código": 267, "Descrição": "Cenoura Cx 21kg", "Tipo": "Pedra"},
-    {"Código": 19, "Descrição": "Champignon Paris 250G un", "Tipo": "Box"},
-    {"Código": 902, "Descrição": "Chuchu Cx 20Kg", "Tipo": "Box"},
-    {"Código": 1555, "Descrição": "Cidra Ralada Pré Cozid Un", "Tipo": "Box"},
-    {"Código": 21, "Descrição": "Coco Seco Cx 18Kg", "Tipo": "Box"},
-    {"Código": 1700, "Descrição": "Coco Verde saco c/10", "Tipo": "Box"},
-    {"Código": 87, "Descrição": "Couve Flor Bdj", "Tipo": "Box"},
-    {"Código": 86, "Descrição": "Couve Flor dz", "Tipo": "Pedra"},
-    {"Código": 108, "Descrição": "Ervilha em Grãos Bdja", "Tipo": "Pedra"},
-    {"Código": 109, "Descrição": "Ervilha Horta Torta Bdj", "Tipo": "Pedra"},
-    {"Código": 279, "Descrição": "Figo Pre Cozido un", "Tipo": "Box"},
-    {"Código": 128, "Descrição": "Figo Roxo bandeija cx c/3un", "Tipo": "Box"},
-    {"Código": 712, "Descrição": "Gengibre Cx 12Kg", "Tipo": "Box"},
-    {"Código": 281, "Descrição": "Gobo Un", "Tipo": "Box"},
-    {"Código": 59, "Descrição": "Goiaba Cx 20Kg", "Tipo": "Box"},
-    {"Código": 1662, "Descrição": "Inhame Cx 22kg", "Tipo": "Pedra"},
-    {"Código": 42, "Descrição": "Jilo Bdj", "Tipo": "Pedra"},
-    {"Código": 41, "Descrição": "Jilo Cx 15Kg", "Tipo": "Pedra"},
-    {"Código": 112, "Descrição": "Kiwi 500g Bdj", "Tipo": "Box"},
-    {"Código": 904, "Descrição": "Kiwi Importado Cx t23 cx 9Kg", "Tipo": "Box"},
-    {"Código": 1651, "Descrição": "Laranja Bahia Cx 18Kg", "Tipo": "Box"},
-    {"Código": 1599, "Descrição": "Laranja Bahia importada Cx 15Kg", "Tipo": "Box"},
-    {"Código": 1307, "Descrição": "Laranja Lima Cx 18Kg", "Tipo": "Box"},
-    {"Código": 9005, "Descrição": "Laranja Lima PC 1,5KG", "Tipo": "Pedra"},
-    {"Código": 1516, "Descrição": "Laranja P/ Suco Cx 20Kg", "Tipo": "Pedra"},
-    {"Código": 53, "Descrição": "Laranja Pera Cx 20Kg", "Tipo": "Pedra"},
-    {"Código": 9006, "Descrição": "Laranja Pera PC 3 KG", "Tipo": "Pedra"},
-    {"Código": 288, "Descrição": "Laranja Pre Cozida un", "Tipo": "Box"},
-    {"Código": 13, "Descrição": "Lima Da Persia Cx 10Kg", "Tipo": "Box"},
-    {"Código": 44, "Descrição": "Limao Cx 22kg 22Kg", "Tipo": "Box"},
-    {"Código": 581, "Descrição": "Limão Rosa Bdja", "Tipo": "Pedra"},
-    {"Código": 91, "Descrição": "Limao Rosa Cx 20Kg", "Tipo": "Pedra"},
-    {"Código": 522, "Descrição": "Limao Siciliano Cx 15Kg", "Tipo": "Box"},
-    {"Código": 291, "Descrição": "Maça Argentina Cx 18Kg", "Tipo": "Box"},
-    {"Código": 9007, "Descrição": "Maça Fuji Cx 18Kg", "Tipo": "Box"},
-    {"Código": 9008, "Descrição": "Maça Gala Cx 18Kg", "Tipo": "Box"},
-    {"Código": 1697, "Descrição": "Maça Gransmith Cx 1/2 9Kg", "Tipo": "Box"},
-    {"Código": 1652, "Descrição": "Maça Pacote 1kg diversos cx 18un", "Tipo": "Box"},
-    {"Código": 2052, "Descrição": "Maça Pink Lady Cx 18Kg", "Tipo": "Box"},
-    {"Código": 106, "Descrição": "Mamao Formosa Cx 10Kg", "Tipo": "Box"},
-    {"Código": 3, "Descrição": "Mamao Papaya Cx 10kg 15un", "Tipo": "Box"},
-    {"Código": 75, "Descrição": "Mandioca Desc 1Kg", "Tipo": "Pedra"},
-    {"Código": 78, "Descrição": "Mandioca Salsa Bdj", "Tipo": "Pedra"},
-    {"Código": 76, "Descrição": "Mandioca Salsa Cx 10Kg", "Tipo": "Pedra"},
-    {"Código": 406, "Descrição": "Manga Espada 6Kg", "Tipo": "Box"},
-    {"Código": 6, "Descrição": "Manga Palmer Cx 18Kg", "Tipo": "Box"},
-    {"Código": 130, "Descrição": "Manga Rosa 18Kg", "Tipo": "Box"},
-    {"Código": 908, "Descrição": "Manga Tomy Cx 19kg", "Tipo": "Box"},
-    {"Código": 92, "Descrição": "Maracuja Azedo Cx 10Kg", "Tipo": "Box"},
-    {"Código": 1646, "Descrição": "Maracuja Doce Cx Plastica 10Kg", "Tipo": "Box"},
-    {"Código": 518, "Descrição": "Maxi Pecan 250G un", "Tipo": "Box"},
-    {"Código": 546, "Descrição": "Maxixe Bandeja 300g", "Tipo": "Pedra"},
-    {"Código": 3003, "Descrição": "Melancia Amarela", "Tipo": "Pedra"},
-    {"Código": 673, "Descrição": "Melancia Baby Cx 14Kg", "Tipo": "Box"},
-    {"Código": 2, "Descrição": "Melancia Favo de Mel", "Tipo": "Pedra"},
-    {"Código": 1, "Descrição": "Melancia Un", "Tipo": "Pedra"},
-    {"Código": 9009, "Descrição": "Melão Amarelo Gaia Cx 13kg", "Tipo": "Box"},
-    {"Código": 1409, "Descrição": "Melão Bebezinho", "Tipo": "Box"},
-    {"Código": 198, "Descrição": "Melao Cantalupe Cx 10Kg", "Tipo": "Box"},
-    {"Código": 412, "Descrição": "Melao Cepi Amarelo Cx 10Kg", "Tipo": "Box"},
-    {"Código": 200, "Descrição": "Melao Dino Cx 10Kg", "Tipo": "Box"},
-    {"Código": 202, "Descrição": "Melao Galia Cx 10Kg", "Tipo": "Box"},
-    {"Código": 1407, "Descrição": "Melao Orange Cx 6Kg", "Tipo": "Box"},
-    {"Código": 424, "Descrição": "Melao Rei Cx 10Kg", "Tipo": "Box"},
-    {"Código": 206, "Descrição": "Melao Rei Sapo Cx 10Kg", "Tipo": "Box"},
-    {"Código": 915, "Descrição": "Melao Sapo Cx 13Kg", "Tipo": "Box"},
-    {"Código": 477, "Descrição": "Mexerica cx 20kg", "Tipo": "Box"},
-    {"Código": 72, "Descrição": "Milho Verde Bdj", "Tipo": "Pedra"},
-    {"Código": 20, "Descrição": "Mirtilo cx c/12", "Tipo": "Box"},
-    {"Código": 58, "Descrição": "Moranguinho Bdj cx c/4", "Tipo": "Pedra"},
-    {"Código": 536, "Descrição": "Moricote Ole cx 18Kg", "Tipo": "Box"},
-    {"Código": 209, "Descrição": "Moyashi un", "Tipo": "Box"},
-    {"Código": 79, "Descrição": "Nabo maco c/6", "Tipo": "Pedra"},
-    {"Código": 916, "Descrição": "Nectarina importada 9Kg", "Tipo": "Box"},
-    {"Código": 22, "Descrição": "Nespera Bdj c/4", "Tipo": "Box"},
-    {"Código": 57, "Descrição": "Pepino Caipira Cx 20Kg", "Tipo": "Pedra"},
-    {"Código": 46, "Descrição": "Pepino Fuchinari Cx 20Kg", "Tipo": "Pedra"},
-    {"Código": 2009, "Descrição": "Pera Argentina cx 18Kg", "Tipo": "Box"},
-    {"Código": 118, "Descrição": "Pera asiatica ou Hossui cx 9Kg", "Tipo": "Box"},
-    {"Código": 119, "Descrição": "Pera Erconini 1kg bdj cx c/10", "Tipo": "Box"},
-    {"Código": 1431, "Descrição": "Pera Nacional cx 20Kg", "Tipo": "Box"},
-    {"Código": 1600, "Descrição": "Pera Portuguesa bdj", "Tipo": "Box"},
-    {"Código": 121, "Descrição": "Pera Portuguesa Cx 9Kg", "Tipo": "Box"},
-    {"Código": 4, "Descrição": "Pera Red Cx 18Kg", "Tipo": "Box"},
-    {"Código": 891, "Descrição": "Pessego importado cx 9Kg", "Tipo": "Box"},
-    {"Código": 537, "Descrição": "Physalis cx c/8", "Tipo": "Box"},
-    {"Código": 52, "Descrição": "Pimenta Americana Cx 10Kg", "Tipo": "Pedra"},
-    {"Código": 80, "Descrição": "Pimenta Biquinho Bdj", "Tipo": "Pedra"},
-    {"Código": 83, "Descrição": "Pimenta Gode Bdj", "Tipo": "Pedra"},
-    {"Código": 540, "Descrição": "Pimenta Vermelha Bdj", "Tipo": "Pedra"},
-    {"Código": 47, "Descrição": "Pimentao Amarelo Cx 10Kg", "Tipo": "Pedra"},
-    {"Código": 949, "Descrição": "Pimentão Misto Bdj", "Tipo": "Pedra"},
-    {"Código": 49, "Descrição": "Pimentao Verde Cx 10Kg", "Tipo": "Pedra"},
-    {"Código": 48, "Descrição": "Pimentao Vermelho Cx 10Kg", "Tipo": "Pedra"},
-    {"Código": 138, "Descrição": "Pinha cx 4,5kg", "Tipo": "Box"},
-    {"Código": 498, "Descrição": "Pinhao saq 10Kg", "Tipo": "Box"},
-    {"Código": 139, "Descrição": "Pitaia Cx 10kg", "Tipo": "Box"},
-    {"Código": 1486, "Descrição": "Poncan cx 20Kg", "Tipo": "Box"},
-    {"Código": 40, "Descrição": "Quiabo Bdj", "Tipo": "Pedra"},
-    {"Código": 110, "Descrição": "Rabanete Bdj", "Tipo": "Pedra"},
-    {"Código": 2886, "Descrição": "Rabanete Maco Dz 12un", "Tipo": "Pedra"},
-    {"Código": 88, "Descrição": "Repolho dz 12un", "Tipo": "Pedra"},
-    {"Código": 84, "Descrição": "Repolho Manteiga Bj dz 12un", "Tipo": "Pedra"},
-    {"Código": 140, "Descrição": "Repolho Roxo Dz 12un", "Tipo": "Pedra"},
-    {"Código": 16, "Descrição": "Roma cx 4,5kg", "Tipo": "Box"},
-    {"Código": 31, "Descrição": "Salsao un", "Tipo": "Box"},
-    {"Código": 32, "Descrição": "Shimeji Branco un", "Tipo": "Box"},
-    {"Código": 679, "Descrição": "Shimeji Preto un", "Tipo": "Box"},
-    {"Código": 33, "Descrição": "Shitake un", "Tipo": "Box"},
-    {"Código": 10, "Descrição": "Tamara Bandeija Palito Un", "Tipo": "Box"},
-    {"Código": 23, "Descrição": "Tamarindo bdj cx c/4", "Tipo": "Box"},
-    {"Código": 364, "Descrição": "Tofu un", "Tipo": "Box"},
-    {"Código": 39, "Descrição": "Tomate Saladete Cx 22Kg", "Tipo": "Pedra"},
-    {"Código": 51, "Descrição": "Tomate Sweet Grape un", "Tipo": "Box"},
-    {"Código": 538, "Descrição": "Tomatinho Bdj Naranti", "Tipo": "Pedra"},
-    {"Código": 147, "Descrição": "Tomatinho cocktail holandez cx 6Kg", "Tipo": "Box"},
-    {"Código": 100, "Descrição": "Uva Niagara Bdja cx c/10", "Tipo": "Box"},
-    {"Código": 9010, "Descrição": "Uva Preta 500g Bdja cx c/10", "Tipo": "Box"},
-    {"Código": 9011, "Descrição": "Uva Preta Benetaka Bdja cx c/10", "Tipo": "Box"},
-    {"Código": 9012, "Descrição": "Uva Verde 500g Bdja cx c/10", "Tipo": "Box"},
-    {"Código": 9013, "Descrição": "Uva Vermelha 500g Bdja cx c/10", "Tipo": "Box"},
-    {"Código": 68, "Descrição": "Vagem Bdj", "Tipo": "Pedra"},
-    {"Código": 67, "Descrição": "Vagem kg Cx 11kg", "Tipo": "Pedra"}
+    {"Cód.Prime": None, "Código": 1571, "Descrição": "Abacate Cx 20 Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 2614, "Descrição": "Abacaxi Doce Mel Cx c/7", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 95, "Descrição": "Abacaxi Hawai Un", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 94, "Descrição": "Abacaxi Perola Un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 232, "Descrição": "Abobora Cabotia 20 Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 235, "Descrição": "Abobora Gigante Doce kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 236, "Descrição": "Abobora Italia Bdj", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 45, "Descrição": "Abobora Italia Cx 20 Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 237, "Descrição": "Abobora Menina Bdj", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 56, "Descrição": "Abobora Menina Cx 20Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 238, "Descrição": "Abobora Moranga Saco 20kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 240, "Descrição": "Abobora Paulista Verde cx 22Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 85, "Descrição": "Acelga Cx c/8", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 1746, "Descrição": "Alface Americana unid", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 9001, "Descrição": "Alho Nacional Cx 10Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 320, "Descrição": "Alho Poro dz", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 894, "Descrição": "Ameixa Importada Cx 9Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 9002, "Descrição": "Ameixa Nacional", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 504, "Descrição": "Amendoim sc 10Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 113, "Descrição": "Aspargos", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 896, "Descrição": "Atemoia Cx 4Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 897, "Descrição": "Avocado Cx 10Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 2567, "Descrição": "Banana Maça Cx", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 2568, "Descrição": "Banana Nanica Cx", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 2569, "Descrição": "Banana Prata Cx", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 98, "Descrição": "Banana Terra Cx 20Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 551, "Descrição": "Batata Asterix Saq 25Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 73, "Descrição": "Batata Doce Branca Cx 22Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 60, "Descrição": "Batata Doce Cx 22Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 508, "Descrição": "Batata kg Saq 25Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 26, "Descrição": "Batata Yacom Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 61, "Descrição": "Berinjela Cx 13Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 2732, "Descrição": "Berinjela Japonesa Bdja", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 62, "Descrição": "Berinjela Japonesa Cx 13Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 256, "Descrição": "Beterraba Cx 21kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 64, "Descrição": "Brocolis Chines BDJ", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 707, "Descrição": "Cabotia 300g Bjda Descascada", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 28, "Descrição": "Caju bandeija cx c/4", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 9003, "Descrição": "Caqui Fuyu cx 20Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 9004, "Descrição": "Caqui Kioto / Chocolate cx 20Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 264, "Descrição": "Caqui Rama Forte Cx 5Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 69, "Descrição": "Cara Cx 22Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 127, "Descrição": "Carambola bandeija cx c/4", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 74, "Descrição": "Caxi Cx 20Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 2730, "Descrição": "Cebola Branca Bdja", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 9000, "Descrição": "Cebola cx 3 Saco 20Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 43, "Descrição": "Cebola Roxa Saco 20Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 17, "Descrição": "Cenoura Baby un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 267, "Descrição": "Cenoura Cx 21kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 19, "Descrição": "Champignon Paris 250G un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 902, "Descrição": "Chuchu Cx 20Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 1555, "Descrição": "Cidra Ralada Pré Cozid Un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 21, "Descrição": "Coco Seco Cx 18Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 1700, "Descrição": "Coco Verde saco c/10", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 87, "Descrição": "Couve Flor Bdj", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 86, "Descrição": "Couve Flor dz", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 108, "Descrição": "Ervilha em Grãos Bdja", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 109, "Descrição": "Ervilha Horta Torta Bdj", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 279, "Descrição": "Figo Pre Cozido un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 128, "Descrição": "Figo Roxo bandeija cx c/3un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 712, "Descrição": "Gengibre Cx 12Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 281, "Descrição": "Gobo Un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 59, "Descrição": "Goiaba Cx 20Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 1662, "Descrição": "Inhame Cx 22kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 42, "Descrição": "Jilo Bdj", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 41, "Descrição": "Jilo Cx 15Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 112, "Descrição": "Kiwi 500g Bdj", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 904, "Descrição": "Kiwi Importado Cx t23 cx 9Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 1651, "Descrição": "Laranja Bahia Cx 18Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 1599, "Descrição": "Laranja Bahia importada Cx 15Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 1307, "Descrição": "Laranja Lima Cx 18Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 9005, "Descrição": "Laranja Lima PC 1,5KG", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 1516, "Descrição": "Laranja P/ Suco Cx 20Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 53, "Descrição": "Laranja Pera Cx 20Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 9006, "Descrição": "Laranja Pera PC 3 KG", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 288, "Descrição": "Laranja Pre Cozida un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 13, "Descrição": "Lima Da Persia Cx 10Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 44, "Descrição": "Limao Cx 22kg 22Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 581, "Descrição": "Limão Rosa Bdja", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 91, "Descrição": "Limao Rosa Cx 20Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 522, "Descrição": "Limao Siciliano Cx 15Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 291, "Descrição": "Maça Argentina Cx 18Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 9007, "Descrição": "Maça Fuji Cx 18Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 9008, "Descrição": "Maça Gala Cx 18Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 1697, "Descrição": "Maça Gransmith Cx 1/2 9Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 1652, "Descrição": "Maça Pacote 1kg diversos cx 18un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 2052, "Descrição": "Maça Pink Lady Cx 18Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 106, "Descrição": "Mamao Formosa Cx 10Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 3, "Descrição": "Mamao Papaya Cx 10kg 15un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 75, "Descrição": "Mandioca Desc 1Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 78, "Descrição": "Mandioca Salsa Bdj", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 76, "Descrição": "Mandioca Salsa Cx 10Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 406, "Descrição": "Manga Espada 6Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 6, "Descrição": "Manga Palmer Cx 18Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 130, "Descrição": "Manga Rosa 18Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 908, "Descrição": "Manga Tomy Cx 19kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 92, "Descrição": "Maracuja Azedo Cx 10Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 1646, "Descrição": "Maracuja Doce Cx Plastica 10Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 518, "Descrição": "Maxi Pecan 250G un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 546, "Descrição": "Maxixe Bandeja 300g", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 3003, "Descrição": "Melancia Amarela", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 673, "Descrição": "Melancia Baby Cx 14Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 2, "Descrição": "Melancia Favo de Mel", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 1, "Descrição": "Melancia Un", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 9009, "Descrição": "Melão Amarelo Gaia Cx 13kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 1409, "Descrição": "Melão Bebezinho", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 198, "Descrição": "Melao Cantalupe Cx 10Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 412, "Descrição": "Melao Cepi Amarelo Cx 10Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 200, "Descrição": "Melao Dino Cx 10Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 202, "Descrição": "Melao Galia Cx 10Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 1407, "Descrição": "Melao Orange Cx 6Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 424, "Descrição": "Melao Rei Cx 10Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 206, "Descrição": "Melao Rei Sapo Cx 10Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 915, "Descrição": "Melao Sapo Cx 13Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 477, "Descrição": "Mexerica cx 20kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 72, "Descrição": "Milho Verde Bdj", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 20, "Descrição": "Mirtilo cx c/12", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 58, "Descrição": "Moranguinho Bdj cx c/4", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 536, "Descrição": "Moricote Ole cx 18Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 209, "Descrição": "Moyashi un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 79, "Descrição": "Nabo maco c/6", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 916, "Descrição": "Nectarina importada 9Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 22, "Descrição": "Nespera Bdj c/4", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 57, "Descrição": "Pepino Caipira Cx 20Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 46, "Descrição": "Pepino Fuchinari Cx 20Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 2009, "Descrição": "Pera Argentina cx 18Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 118, "Descrição": "Pera asiatica ou Hossui cx 9Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 119, "Descrição": "Pera Erconini 1kg bdj cx c/10", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 1431, "Descrição": "Pera Nacional cx 20Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 1600, "Descrição": "Pera Portuguesa bdj", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 121, "Descrição": "Pera Portuguesa Cx 9Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 4, "Descrição": "Pera Red Cx 18Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 891, "Descrição": "Pessego importado cx 9Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 537, "Descrição": "Physalis cx c/8", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 52, "Descrição": "Pimenta Americana Cx 10Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 80, "Descrição": "Pimenta Biquinho Bdj", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 83, "Descrição": "Pimenta Gode Bdj", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 540, "Descrição": "Pimenta Vermelha Bdj", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 47, "Descrição": "Pimentao Amarelo Cx 10Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 949, "Descrição": "Pimentão Misto Bdj", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 49, "Descrição": "Pimentao Verde Cx 10Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 48, "Descrição": "Pimentao Vermelho Cx 10Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 138, "Descrição": "Pinha cx 4,5kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 498, "Descrição": "Pinhao saq 10Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 139, "Descrição": "Pitaia Cx 10kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 1486, "Descrição": "Poncan cx 20Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 40, "Descrição": "Quiabo Bdj", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 110, "Descrição": "Rabanete Bdj", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 2886, "Descrição": "Rabanete Maco Dz 12un", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 88, "Descrição": "Repolho dz 12un", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 84, "Descrição": "Repolho Manteiga Bj dz 12un", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 140, "Descrição": "Repolho Roxo Dz 12un", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 16, "Descrição": "Roma cx 4,5kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 31, "Descrição": "Salsao un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 32, "Descrição": "Shimeji Branco un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 679, "Descrição": "Shimeji Preto un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 33, "Descrição": "Shitake un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 10, "Descrição": "Tamara Bandeija Palito Un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 23, "Descrição": "Tamarindo bdj cx c/4", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 364, "Descrição": "Tofu un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 39, "Descrição": "Tomate Saladete Cx 22Kg", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 51, "Descrição": "Tomate Sweet Grape un", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 538, "Descrição": "Tomatinho Bdj Naranti", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 147, "Descrição": "Tomatinho cocktail holandez cx 6Kg", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 100, "Descrição": "Uva Niagara Bdja cx c/10", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 9010, "Descrição": "Uva Preta 500g Bdja cx c/10", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 9011, "Descrição": "Uva Preta Benetaka Bdja cx c/10", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 9012, "Descrição": "Uva Verde 500g Bdja cx c/10", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 9013, "Descrição": "Uva Vermelha 500g Bdja cx c/10", "Tipo": "Box"},
+    {"Cód.Prime": None, "Código": 68, "Descrição": "Vagem Bdj", "Tipo": "Pedra"},
+    {"Cód.Prime": None, "Código": 67, "Descrição": "Vagem kg Cx 11kg", "Tipo": "Pedra"}
 ]
 
 mapa_inicial_codigos = {
@@ -463,70 +468,98 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 # VARIÁVEIS DAS ABAS (OFERTAS)
 WS_PRODUTOS = "Ofertas_Produtos"
 WS_PEDIDOS  = "Ofertas_Pedidos"
-WS_ESTOQUE  = "Ofertas_Estoque"
 
 @st.cache_data(ttl=15)
 def carregar_banco():
     df_prod = conn.read(worksheet=WS_PRODUTOS)
     df_ped = conn.read(worksheet=WS_PEDIDOS)
-    df_est = conn.read(worksheet=WS_ESTOQUE)
 
     mudou_algo = False
+    
+    # NORMALIZAÇÃO BLINDADA DE COLUNAS
+    df_prod.columns = df_prod.columns.astype(str).str.strip()
+    df_ped.columns = df_ped.columns.astype(str).str.strip()
+    
+    renomear_prod = {}
+    for c in df_prod.columns:
+        cl = c.lower()
+        if "prime" in cl: 
+            renomear_prod[c] = "Cód.Prime"
+        elif cl in ["código", "codigo", "cod", "cód", "cod.", "cód.", "cód. iceasa", "cód.interno"]: 
+            renomear_prod[c] = "Código"
+        elif cl in ["descrição", "descricao", "desc"]: 
+            renomear_prod[c] = "Descrição"
+        elif cl in ["tipo", "setor"]: 
+            renomear_prod[c] = "Tipo"
+    df_prod = df_prod.rename(columns=renomear_prod)
 
-    if df_prod.empty or "Código" not in df_prod.columns:
+    renomear_ped = {}
+    for c in df_ped.columns:
+        cl = c.lower()
+        if cl in ["código", "codigo", "cod", "cód", "cod.", "cód.", "cód. iceasa", "cód.interno"]: 
+            renomear_ped[c] = "Código"
+        elif cl in ["r$preço", "r$ preço", "preço", "preco"]: 
+            renomear_ped[c] = "R$Preço"
+        elif cl in ["obs:", "obs", "observacao", "observação"]: 
+            renomear_ped[c] = "OBS:"
+    df_ped = df_ped.rename(columns=renomear_ped)
+
+    # Força Bruta para garantir colunas obrigatórias em Produtos
+    for col in ["Cód.Prime", "Código", "Descrição", "Tipo"]:
+        if col not in df_prod.columns:
+            df_prod[col] = None if col == "Cód.Prime" else ""
+            mudou_algo = True
+            
+    if df_prod.empty:
         df_prod = pd.DataFrame(produtos_iniciais)
         for loja in LOJAS: df_prod[loja] = True
         conn.update(worksheet=WS_PRODUTOS, data=df_prod)
         mudou_algo = True
 
-    if df_ped.empty or "Código" not in df_ped.columns:
-        df_ped = pd.DataFrame(columns=["Código"] + LOJAS + ["R$Preço", "OBS:"])
+    # Força Bruta para garantir colunas obrigatórias em Pedidos
+    for col in ["Código", "R$Preço", "OBS:"] + LOJAS:
+        if col not in df_ped.columns:
+            if col == "R$Preço": df_ped[col] = 0.0
+            elif col == "OBS:": df_ped[col] = ""
+            else: df_ped[col] = 0
+            mudou_algo = True
+            
+    if df_ped.empty:
         df_ped["Código"] = df_prod["Código"]
-        df_ped[LOJAS] = 0
-        df_ped["R$Preço"] = 0.0
-        df_ped["OBS:"] = ""
         conn.update(worksheet=WS_PEDIDOS, data=df_ped)
         mudou_algo = True
 
-    if df_est.empty or "Código" not in df_est.columns:
-        df_est = pd.DataFrame(columns=["Código"] + LOJAS)
-        df_est["Código"] = df_prod["Código"]
-        df_est[LOJAS] = 0
-        conn.update(worksheet=WS_ESTOQUE, data=df_est)
-        mudou_algo = True
+    # Remove Cód.Prime do Pedidos se o usuário criou lá no Sheets sem querer
+    for drop_col in ["Cód.Prime", "Prime"]:
+        if drop_col in df_ped.columns:
+            df_ped = df_ped.drop(columns=[drop_col])
 
+    # Adiciona produtos novos nos Pedidos
     novos_ped = df_prod[~df_prod["Código"].isin(df_ped["Código"])]["Código"]
     if not novos_ped.empty:
         df_n_ped = pd.DataFrame({"Código": novos_ped})
-        df_n_ped[LOJAS] = 0
+        for col in LOJAS: df_n_ped[col] = 0
         df_n_ped["R$Preço"] = 0.0
         df_n_ped["OBS:"] = ""
         df_ped = pd.concat([df_ped, df_n_ped], ignore_index=True)
         conn.update(worksheet=WS_PEDIDOS, data=df_ped)
         mudou_algo = True
 
-    novos_est = df_prod[~df_prod["Código"].isin(df_est["Código"])]["Código"]
-    if not novos_est.empty:
-        df_n_est = pd.DataFrame({"Código": novos_est})
-        df_n_est[LOJAS] = 0
-        df_est = pd.concat([df_est, df_n_est], ignore_index=True)
-        conn.update(worksheet=WS_ESTOQUE, data=df_est)
-        mudou_algo = True
-
+    # Converte os tipos de dados
     for loja in LOJAS:
-        if loja in df_ped.columns: df_ped[loja] = pd.to_numeric(df_ped[loja], errors='coerce').fillna(0).astype(int)
-        if loja in df_est.columns: df_est[loja] = pd.to_numeric(df_est[loja], errors='coerce').fillna(0).astype(int)
-        if loja in df_prod.columns: df_prod[loja] = df_prod[loja].fillna(False).astype(bool)
+        df_ped[loja] = pd.to_numeric(df_ped[loja], errors='coerce').fillna(0).astype(int)
+        df_prod[loja] = df_prod[loja].fillna(False).astype(bool)
 
-    if "R$Preço" in df_ped.columns: df_ped["R$Preço"] = pd.to_numeric(df_ped["R$Preço"], errors='coerce').fillna(0.0)
-    if "OBS:" in df_ped.columns: df_ped["OBS:"] = df_ped["OBS:"].fillna("").astype(str)
+    df_ped["R$Preço"] = pd.to_numeric(df_ped["R$Preço"], errors='coerce').fillna(0.0)
+    df_ped["OBS:"] = df_ped["OBS:"].fillna("").astype(str)
+    df_prod["Cód.Prime"] = pd.to_numeric(df_prod["Cód.Prime"], errors='coerce').fillna(0).astype(int)
 
     if mudou_algo:
         st.cache_data.clear()
 
-    return df_prod, df_ped, df_est
+    return df_prod, df_ped
 
-df_produtos, df_pedidos, df_estoque = carregar_banco()
+df_produtos, df_pedidos = carregar_banco()
 
 LISTA_NOMES_PRODUTOS = [str(x) for x in df_produtos['Descrição'].unique()]
 
@@ -618,8 +651,8 @@ if not acesso_total:
 # MODAL ZERAR TUDO
 # ─────────────────────────────────────────────
 @st.dialog("🚨 Confirmação Necessária")
-def modal_zerar_estoque_pedidos():
-    st.markdown("Tem certeza que deseja **zerar todos os pedidos e o estoque** de todas as lojas?")
+def modal_zerar_pedidos():
+    st.markdown("Tem certeza que deseja **zerar todos os pedidos** de todas as lojas?")
     st.markdown("⚠️ *Esta ação limpará também os preços e observações direto no Google Sheets e não poderá ser desfeita.*")
     
     st.write("<br>", unsafe_allow_html=True)
@@ -630,15 +663,13 @@ def modal_zerar_estoque_pedidos():
     with c2:
         if st.button("✔️ Sim, zerar tudo", type="primary", use_container_width=True):
             st.session_state['reset_counter'] += 1
-            df_prod, df_ped, df_est = carregar_banco()
+            _, df_ped = carregar_banco()
             
             df_ped[LOJAS] = 0
             df_ped["R$Preço"] = 0.0
             df_ped["OBS:"] = ""
-            df_est[LOJAS] = 0
             
             conn.update(worksheet=WS_PEDIDOS, data=df_ped)
-            conn.update(worksheet=WS_ESTOQUE, data=df_est)
             st.cache_data.clear()
             st.rerun()
 
@@ -679,36 +710,37 @@ with st.sidebar:
 # HELPER: gera o arquivo Excel formatado
 # ─────────────────────────────────────────────
 def _gerar_excel_formatado(df_editado_admin, filtro_setor):
-    """
-    Recebe o DataFrame já editado e o filtro de setor.
-    Retorna bytes do .xlsx com todo o texto em negrito e cores intercaladas por COLUNA (A até Q).
-    """
-    HDR_BG    = "C55A11"   # laranja escuro — cabeçalho
-    HDR_FG    = "FFFFFF"   # branco
-    GREEN_ROW = "E2EFDA"   # verde claro alternado
-    WHITE_ROW = "FFFFFF"   # branco alternado
-    TOTAL_BG  = "C6EFCE"   # verde suave — coluna TOTAL
-    PRICE_BG  = "FCE4D6"   # laranja suave — coluna PREÇO
+    HDR_BG    = "C55A11"   
+    HDR_FG    = "FFFFFF"   
+    GREEN_ROW = "E2EFDA"   
+    WHITE_ROW = "FFFFFF"   
+    TOTAL_BG  = "C6EFCE"   
+    PRICE_BG  = "FCE4D6"   
 
     thin = Side(style="thin", color="BFBFBF")
     brd  = Border(left=thin, right=thin, top=thin, bottom=thin)
 
     df_exp = df_editado_admin.copy()
+    
+    # Remove Cód.Prime do Excel para manter o padrão antigo exato
+    df_exp = df_exp.drop(columns=["Cód.Prime"], errors="ignore")
     df_exp = df_exp.rename(columns=MAPA_LOJAS)
 
     if filtro_setor in ("Box", "Pedra"):
         df_exp = df_exp.rename(columns={
-            "Código":      "CODIGO",
+            "Código":      "COD.ICEASA",
             "Descrição":   "PRODUTOS MOLICENTER",
             "TOTAL GERAL": "TOTAL",
             "R$Preço":     "PREÇO",
         })
+    else:
+        df_exp = df_exp.rename(columns={"Código": "Cód. Iceasa"})
 
-    cod_col  = "CODIGO"      if filtro_setor in ("Box", "Pedra") else "Código"
-    prod_col = "PRODUTOS MOLICENTER" if filtro_setor in ("Box", "Pedra") else "Descrição"
-    tot_col  = "TOTAL"       if filtro_setor in ("Box", "Pedra") else "TOTAL GERAL"
-    pre_col  = "PREÇO"       if filtro_setor in ("Box", "Pedra") else "R$Preço"
-    obs_col  = "OBS:"
+    cod_col       = "COD.ICEASA" if filtro_setor in ("Box", "Pedra") else "Cód. Iceasa"
+    prod_col      = "PRODUTOS MOLICENTER" if filtro_setor in ("Box", "Pedra") else "Descrição"
+    tot_col       = "TOTAL"        if filtro_setor in ("Box", "Pedra") else "TOTAL GERAL"
+    pre_col       = "PREÇO"        if filtro_setor in ("Box", "Pedra") else "R$Preço"
+    obs_col       = "OBS:"
 
     base_cols = [cod_col, prod_col]
     if "Tipo" in df_exp.columns:
@@ -758,7 +790,9 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
                 cell.alignment = Alignment(horizontal="center", vertical="center")
 
             if col_name == tot_col:
-                cell.value = f'=IF(SUM(C{ri}:P{ri})=0,"",SUM(C{ri}:P{ri}))'
+                idx_ini = get_column_letter(len(base_cols) + 1)
+                idx_fim = get_column_letter(len(base_cols) + len(store_cols))
+                cell.value = f'=IF(SUM({idx_ini}{ri}:{idx_fim}{ri})=0,"",SUM({idx_ini}{ri}:{idx_fim}{ri}))'
                 cell.fill = PatternFill("solid", start_color=TOTAL_BG)
                 cell.font = Font(name="Arial", size=9, bold=True)
                             
@@ -768,7 +802,7 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
                     cell.number_format = '[$R$-pt-BR] #,##0.00'
             
             else:
-                if ci <= 17:  
+                if ci > len(base_cols) and ci <= len(base_cols) + len(store_cols):
                     col_bg = GREEN_ROW if ci % 2 != 0 else WHITE_ROW
                 else:
                     col_bg = WHITE_ROW  
@@ -776,12 +810,12 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
                 cell.fill = PatternFill("solid", start_color=col_bg)
 
     widths = {
-        cod_col:  8,
-        prod_col: 34,
-        "Tipo":   8,
-        tot_col:  8,
-        pre_col:  12,
-        obs_col:  22,
+        cod_col:       9,
+        prod_col:      34,
+        "Tipo":        8,
+        tot_col:       8,
+        pre_col:       12,
+        obs_col:       22,
     }
     for s in store_cols:
         widths[s] = 6
@@ -798,10 +832,15 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
     freeze_col = len(base_cols) + 1
     ws.freeze_panes = f"{get_column_letter(freeze_col)}{DATA_START}"
 
-    ws.row_dimensions[1].height          = 6   
+    ws.row_dimensions[1].height = 6   
     ws.row_dimensions[HEADER_ROW].height = 18
     for ri in range(DATA_START, DATA_START + len(df_exp)):
         ws.row_dimensions[ri].height = 15
+
+    ws.sheet_properties.pageSetUpPr.fitToPage = True
+    ws.page_setup.fitToWidth = 1
+    ws.page_setup.fitToHeight = False
+    ws.page_setup.orientation = ws.ORIENTATION_LANDSCAPE
 
     buf = io.BytesIO()
     wb.save(buf)
@@ -827,18 +866,22 @@ if perfil_navegacao == "Separação e Fechamento":
         filtro_setor = st.radio("🔍 Filtrar Exibição por Setor:", ["Todos", "Box", "Pedra"], horizontal=True)
         st.write("<br>", unsafe_allow_html=True)
 
-        df_base  = df_produtos[["Código","Descrição","Tipo"]]
+        df_base  = df_produtos[["Cód.Prime", "Código","Descrição","Tipo"]]
         df_final = pd.merge(df_base, df_pedidos, on="Código")
         df_final["TOTAL GERAL"] = df_final[LOJAS].sum(axis=1)
-        cols_order = ["Código", "Descrição", "Tipo"] + LOJAS + ["TOTAL GERAL", "R$Preço", "OBS:"]
+        cols_order = ["Cód.Prime", "Código", "Descrição", "Tipo"] + LOJAS + ["TOTAL GERAL", "R$Preço", "OBS:"]
         df_final = df_final[cols_order]
 
         if filtro_setor != "Todos":
             df_final = df_final[df_final["Tipo"] == filtro_setor].reset_index(drop=True)
             df_final = df_final.drop(columns=["Tipo"])
 
+        # Oculta zeros no código Prime para estética
+        df_final["Cód.Prime"] = df_final["Cód.Prime"].replace(0, None)
+
         col_cfg = {
-            "Código":      st.column_config.NumberColumn(width=80, format="%d", disabled=True),
+            "Cód.Prime":   st.column_config.NumberColumn("Cód. Prime", width=70, format="%d", disabled=True),
+            "Código":      st.column_config.NumberColumn("Cód. Iceasa", width=80, format="%d", disabled=True),
             "Descrição":   st.column_config.TextColumn(disabled=True),
             "TOTAL GERAL": st.column_config.NumberColumn("TOTAL ▶", width=90, format="%d", disabled=True),
             "R$Preço":     st.column_config.NumberColumn("R$ Preço", width=100, format="R$ %.2f", min_value=0.0, step=0.01),
@@ -856,13 +899,27 @@ if perfil_navegacao == "Separação e Fechamento":
             height=580, column_config=col_cfg,
             key=f"admin_editor_{st.session_state['reset_counter']}"
         )
+        
+        # Oculta o Cód.Prime na hora da impressão para manter o padrão antigo
+        df_imprimir = df_editado_admin.copy()
+        df_imprimir = df_imprimir.drop(columns=["Cód.Prime"], errors="ignore")
+        df_imprimir = df_imprimir.rename(columns={"Código": "Cód. Iceasa"})
+        html_table = df_imprimir.to_html(index=False, classes=["print-table", "print-sep"])
+        st.markdown(f"""<div id="print-section">
+            <h2 style="color: black; margin-bottom: 10px; text-align: center; border-bottom: 2px solid black; padding-bottom: 5px;">
+                Resumo de Separação — FLV Ofertas
+            </h2>
+            <div class="print-container">
+                {html_table}
+            </div>
+        </div>""", unsafe_allow_html=True)
 
         st.divider()
         col_salvar, col_csv, col_excel, col_limpa, _ = st.columns([2.5, 1.5, 1.5, 2, 2.5])
 
         with col_salvar:
             if st.button("💾 Salvar Alterações", type="primary", use_container_width=True):
-                _, df_ped_fresco, _ = carregar_banco()
+                _, df_ped_fresco = carregar_banco()
                 for _, row in df_editado_admin.iterrows():
                     mask = df_ped_fresco["Código"] == row["Código"]
                     for loja in LOJAS:
@@ -877,13 +934,14 @@ if perfil_navegacao == "Separação e Fechamento":
 
         with col_csv:
             df_csv = df_editado_admin.copy()
+            df_csv = df_csv.drop(columns=["Cód.Prime"], errors="ignore")
             df_csv = df_csv.rename(columns=MAPA_LOJAS)
             csv = df_csv.to_csv(index=False).encode("utf-8")
-            st.download_button("⬇️ CSV", data=csv, file_name="separacao_semanal.csv", mime="text/csv", use_container_width=True)
+            st.download_button("⬇️ CSV", data=csv, file_name="separacao_semanal_ofertas.csv", mime="text/csv", use_container_width=True)
             
         with col_excel:
             excel_bytes = _gerar_excel_formatado(df_editado_admin, filtro_setor)
-            nome_arquivo_excel = f"separacao_{filtro_setor.lower()}.xlsx" if filtro_setor != "Todos" else "separacao_semanal.xlsx"
+            nome_arquivo_excel = f"separacao_ofertas_{filtro_setor.lower()}.xlsx" if filtro_setor != "Todos" else "separacao_semanal_ofertas.xlsx"
             st.download_button(
                 "⬇️ Excel",
                 data=excel_bytes,
@@ -893,8 +951,8 @@ if perfil_navegacao == "Separação e Fechamento":
             )
 
         with col_limpa:
-            if st.button("🚨 Zerar Pedidos/Estoque", use_container_width=True):
-                modal_zerar_estoque_pedidos()
+            if st.button("🚨 Zerar Pedidos", use_container_width=True):
+                modal_zerar_pedidos()
 
 # ─────────────────────────────────────────────
 # ROTA 2: VISÃO DAS LOJAS
@@ -914,7 +972,7 @@ elif perfil_navegacao == "Visão das Lojas":
                 <span style="font-size:22px">📋</span>
                 <div>
                     <div class="topbar-title">{loja_selecionada} ({id_loja}) — FLV Ofertas</div>
-                    <div class="topbar-sub">Preencha o estoque atual e a quantidade necessária para o pedido</div>
+                    <div class="topbar-sub">O estoque é carregado pelo ERP Prime. Preencha a quantidade necessária para o pedido.</div>
                 </div>
             </div>
         </div>
@@ -926,21 +984,61 @@ elif perfil_navegacao == "Visão das Lojas":
             st.rerun()
 
     df_visiveis = df_produtos[df_produtos[loja_selecionada] == True]
-    df_loja = df_visiveis[["Código","Descrição","Tipo"]].copy()
-    df_est = df_estoque[["Código", loja_selecionada]].rename(columns={loja_selecionada: "Estoque"})
+    df_loja = df_visiveis[["Cód.Prime", "Código", "Descrição", "Tipo"]].copy()
+    
+    # ------------------ ESTOQUE VIA POSTGRESQL ----------------------
+    try:
+        conn_pg = st.connection("banco_erp", type="sql")
+        mapa_banco_erp = {
+            "Loja 01": "001", "Loja 02": "002", "Loja 03": "003",
+            "Loja 04": "004", "Loja 05": "005", "Loja 06": "006",
+            "Loja 07": "007", "Loja 08": "008"
+        }
+        cod_empresa_banco = mapa_banco_erp.get(loja_selecionada, "001")
+
+        query_erp = f"""
+            SELECT cadprodemp.cade_codempresa,
+                   cadprodemp.cade_codigo,
+                   cadprod.cadp_descricao,
+                   (COALESCE(cadprodemp.cade_estoque1::numeric(18,2), 0) + COALESCE(cadprodemp.cade_estoque6::numeric(18,2), 0)) AS estoque
+            FROM cadprodemp
+            JOIN cadprod ON cadprodemp.cade_codigo = cadprod.cadp_codigo
+            WHERE cadprodemp.cade_ativo::text = 'S'::text 
+              AND cadprodemp.cade_codempresa::text = '{cod_empresa_banco}'
+            ORDER BY cadprodemp.cade_codempresa, cadprodemp.cade_codigo
+        """
+        df_erp = conn_pg.query(query_erp, ttl=300)
+
+        if not df_erp.empty:
+            df_erp["cade_codigo"] = pd.to_numeric(df_erp["cade_codigo"], errors='coerce').fillna(0).astype(int)
+            df_erp = df_erp.rename(columns={"cade_codigo": "Cód.Prime", "estoque": "Estoque"})
+            df_loja["Cód.Prime"] = pd.to_numeric(df_loja["Cód.Prime"], errors='coerce').fillna(0).astype(int)
+            df_loja = pd.merge(df_loja, df_erp[["Cód.Prime", "Estoque"]], on="Cód.Prime", how="left")
+        else:
+            df_loja["Estoque"] = 0
+
+    except Exception as e:
+        if "No database configured" in str(e) or "missing" in str(e).lower():
+             st.error("⚠️ Aviso: As credenciais do banco_erp precisam estar configuradas no Streamlit Secrets.")
+        else:
+             st.error(f"⚠️ Erro ao puxar dados do ERP: {e}")
+        df_loja["Estoque"] = 0
+    # -----------------------------------------------------------------
+
+    df_loja["Estoque"] = df_loja["Estoque"].fillna(0).astype(int)
     df_qtd = df_pedidos[["Código", loja_selecionada]].rename(columns={loja_selecionada: "Qtde"})
-    df_loja = pd.merge(df_loja, df_est, on="Código", how="left")
     df_loja = pd.merge(df_loja, df_qtd, on="Código", how="left")
+    
+    df_loja["Cód.Prime"] = df_loja["Cód.Prime"].replace(0, None)
 
     with st.container(border=True):
-        st.info("💡 **Dica:** Preencha primeiro o **Estoque** e depois a **Qtde** do pedido.")
-        
         col_cfg_loja = {
-            "Código":         st.column_config.NumberColumn(width=85, format="%d", disabled=True),
+            "Código":         None, 
+            "Cód.Prime":      st.column_config.NumberColumn("Cód. Prime", width=70, format="%d", disabled=True),
             "Descrição":      st.column_config.TextColumn(width=400, disabled=True),
-            "Tipo":           st.column_config.TextColumn("Setor", width=100, disabled=True),
-            "Estoque":        st.column_config.NumberColumn("📦 Estoque", width=120, min_value=0, step=1),
-            "Qtde":           st.column_config.NumberColumn("🛒 Qtde", width=120, min_value=0, step=1)
+            "Tipo":           st.column_config.TextColumn("Setor", width=80, disabled=True),
+            "Estoque":        st.column_config.NumberColumn("📦 Estoque", width=100, disabled=True),
+            "Qtde":           st.column_config.NumberColumn("🛒 Pedido", width=100, min_value=0, step=1)
         }
         
         df_editado = st.data_editor(
@@ -950,8 +1048,10 @@ elif perfil_navegacao == "Visão das Lojas":
         )
 
         df_imprimir = df_editado.copy()
+        df_imprimir = df_imprimir.drop(columns=["Cód.Prime"], errors="ignore")
         df_imprimir["Código"] = df_imprimir["Código"].fillna(0).astype(int).astype(str)
-        df_imprimir = df_imprimir.rename(columns={"Tipo": "Setor", "Estoque": "Est.", "Qtde": "Ped."})
+        df_imprimir = df_imprimir.rename(columns={"Código": "Cód", "Tipo": "Setor", "Estoque": "Est.", "Qtde": "Ped."})
+        df_imprimir = df_imprimir[["Cód", "Descrição", "Setor", "Est.", "Ped."]] 
         
         meio = (len(df_imprimir) // 2) + (len(df_imprimir) % 2)
         df1 = df_imprimir.iloc[:meio]
@@ -986,23 +1086,25 @@ elif perfil_navegacao == "Visão das Lojas":
         with col_print:
             st.write("<br>", unsafe_allow_html=True)
             if st.button("🖨️ Imprimir", use_container_width=True):
-                components.html("<script>window.parent.print();</script>", height=0)
+                components.html(
+                    "<script>"
+                    "window.parent.print();"
+                    "</script>", 
+                    height=0
+                )
                 
         with col_btn:
             st.write("<br>", unsafe_allow_html=True)
             if st.button("💾 Salvar Pedido da Semana", type="primary", use_container_width=True):
-                _, df_ped_fresco, df_est_fresco = carregar_banco()
+                _, df_ped_fresco = carregar_banco()
                 
                 for _, row in df_editado.iterrows():
                     mask_ped = df_ped_fresco["Código"] == row["Código"]
-                    mask_est = df_est_fresco["Código"] == row["Código"]
                     df_ped_fresco.loc[mask_ped, loja_selecionada] = row["Qtde"]
-                    df_est_fresco.loc[mask_est, loja_selecionada] = row["Estoque"]
                 
                 conn.update(worksheet=WS_PEDIDOS, data=df_ped_fresco)
-                conn.update(worksheet=WS_ESTOQUE, data=df_est_fresco)
                 st.cache_data.clear()
-                st.success(f"✅ Estoque e Pedido da {loja_selecionada} salvos na nuvem!")
+                st.success(f"✅ Pedido da {loja_selecionada} salvo na nuvem com sucesso!")
 
 # ─────────────────────────────────────────────
 # ROTA 3: VISÃO FORNECEDORES (ADEMILTO)
@@ -1013,7 +1115,7 @@ elif perfil_navegacao == "Visão Fornecedores (Ademilto)":
         <span style="font-size: 26px; margin-right: 12px;">🚚</span>
         <div style="display: inline-block; vertical-align: top;">
             <div style="font-size: 20px; font-weight: 700; color: var(--text-header);">Visão Fornecedores (Ademilto) - Modo de Edição Livre</div>
-            <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Altere nomes, códigos e totais livremente antes de gerar seu print. Adicione ou remova linhas na própria tabela.</div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Altere nomes, códigos e totais livremente antes de gerar seu print. Edite os campos diretamente na tabela.</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1068,7 +1170,7 @@ elif perfil_navegacao == "Visão Fornecedores (Ademilto)":
                             use_container_width=True, 
                             column_config=col_configs_especial,
                             height=altura_esp,
-                            num_rows="dynamic",
+                            num_rows="fixed",
                             key=f"forn_esp_{fornecedor}_{st.session_state['reset_counter']}"
                         )
                     
@@ -1095,7 +1197,7 @@ elif perfil_navegacao == "Visão Fornecedores (Ademilto)":
                             use_container_width=True, 
                             column_config=col_cfg_forn,
                             height=altura_dinamica,
-                            num_rows="dynamic",
+                            num_rows="fixed",
                             key=f"forn_{fornecedor}_{st.session_state['reset_counter']}"
                         )
                         
@@ -1117,16 +1219,26 @@ elif perfil_navegacao == "Catálogo de Produtos":
         <span style="font-size: 26px; margin-right: 12px;">🏷️</span>
         <div style="display: inline-block; vertical-align: top;">
             <div style="font-size: 20px; font-weight: 700; color: var(--text-header);">Catálogo de Produtos</div>
-            <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Gerencie itens, defina o setor (Box/Pedra) e as permissões por loja</div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Vincule o Cód. Prime do ERP, gerencie itens e defina o setor e as permissões por loja.</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
     with st.container(border=True):
         st.caption("➕ Adicione produtos na última linha  •  🗑️ Selecione a linha e pressione **Delete** para remover  •  ✅ Checkboxes controlam visibilidade por loja")
+        
+        col_btn1, col_info, _ = st.columns([3, 5, 2])
+        with col_btn1:
+            btn_salvar = st.button("💾 Salvar Códigos e Catálogo", type="primary", use_container_width=True)
+        with col_info:
+            st.info("💡 Digite o Cód. ERP (Prime) ou faça alterações, depois clique em **Salvar**!")
+
+        df_cat_edit = df_produtos.copy()
+        df_cat_edit["Cód.Prime"] = df_cat_edit["Cód.Prime"].replace(0, None)
 
         config_catalogo = {
-            "Código":    st.column_config.NumberColumn("Cód. Interno", width=90, required=True, min_value=0, format="%d"),
+            "Cód.Prime": st.column_config.NumberColumn("Cód. ERP (Prime)", width=120, min_value=0, format="%d"),
+            "Código":    st.column_config.NumberColumn("Cód. Iceasa", width=90, required=True, min_value=0, format="%d"),
             "Descrição": st.column_config.TextColumn("Descrição do Item", width=310, required=True),
             "Tipo":      st.column_config.SelectboxColumn("Setor", options=["Box", "Pedra"], width=100, required=True),
         }
@@ -1134,7 +1246,7 @@ elif perfil_navegacao == "Catálogo de Produtos":
             config_catalogo[loja] = st.column_config.CheckboxColumn(loja, default=True, width=70)
 
         df_cat_editado = st.data_editor(
-            df_produtos,
+            df_cat_edit,
             num_rows="dynamic",
             column_config=config_catalogo,
             hide_index=True,
@@ -1142,15 +1254,9 @@ elif perfil_navegacao == "Catálogo de Produtos":
             height=580
         )
 
-        st.divider()
-        col_atualizar, col_info, _ = st.columns([2, 4, 4])
-        with col_atualizar:
-            if st.button("🔄 Atualizar Catálogo", type="primary", use_container_width=True):
-                conn.update(worksheet=WS_PRODUTOS, data=df_cat_editado)
-                st.cache_data.clear()
-                st.success("✅ Catálogo e permissões atualizados para todas as lojas!")
-                st.rerun()
-        with col_info:
-            total_prods = len(df_cat_editado)
-            st.info(f"📦 **{total_prods}** produtos cadastrados  •  "
-                    f"**{len(LOJAS)}** lojas configuradas")
+        if btn_salvar:
+            df_cat_editado["Cód.Prime"] = pd.to_numeric(df_cat_editado["Cód.Prime"], errors='coerce').fillna(0).astype(int)
+            conn.update(worksheet=WS_PRODUTOS, data=df_cat_editado)
+            st.cache_data.clear()
+            st.success("✅ Catálogo e permissões atualizados para todas as lojas!")
+            st.rerun()
