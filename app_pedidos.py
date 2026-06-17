@@ -551,7 +551,7 @@ with st.sidebar:
         st.rerun()
 
 # ─────────────────────────────────────────────
-# HELPER: gera o arquivo Excel formatado (MANTIDO IGUAL)
+# HELPER: gera o arquivo Excel formatado (ATUALIZADO)
 # ─────────────────────────────────────────────
 def _gerar_excel_formatado(df_editado_admin, filtro_setor):
     HDR_BG    = "C55A11"   
@@ -561,7 +561,7 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
     TOTAL_BG  = "C6EFCE"   
     PRICE_BG  = "FCE4D6"   
 
-    thin = Side(style="thin", color="BFBFBF")
+    thin = Side(style="thin", color="000000") # Borda preta
     brd  = Border(left=thin, right=thin, top=thin, bottom=thin)
 
     df_exp = df_editado_admin.copy()
@@ -571,7 +571,7 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
 
     if filtro_setor in ("Box", "Pedra"):
         df_exp = df_exp.rename(columns={
-            "Código":      "COD.ICEASA",
+            "Código":      "CODIGO", # Alterado de COD.ICEASA
             "Descrição":   "PRODUTOS MOLICENTER",
             "TOTAL GERAL": "TOTAL",
             "R$Preço":     "PREÇO",
@@ -579,7 +579,7 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
     else:
         df_exp = df_exp.rename(columns={"Código": "Cód. Iceasa"})
 
-    cod_col       = "COD.ICEASA" if filtro_setor in ("Box", "Pedra") else "Cód. Iceasa"
+    cod_col       = "CODIGO" if filtro_setor in ("Box", "Pedra") else "Cód. Iceasa"
     prod_col      = "PRODUTOS MOLICENTER" if filtro_setor in ("Box", "Pedra") else "Descrição"
     tot_col       = "TOTAL"        if filtro_setor in ("Box", "Pedra") else "TOTAL GERAL"
     pre_col       = "PREÇO"        if filtro_setor in ("Box", "Pedra") else "R$Preço"
@@ -600,7 +600,7 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
 
     wb = openpyxl.Workbook()
     ws = wb.active
-    ws.title = "Pedidos FLV"
+    ws.title = "PEDIDO BOX" # Alterado o nome da aba
 
     HEADER_ROW = 2    
     DATA_START  = 3
@@ -622,6 +622,14 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
             if raw == 0 or raw == 0.0 or str(raw).strip() in ("0", "0.0", "nan", ""):
                 raw = None
 
+            # Lógica para ocultar códigos acima de 9000
+            if col_name == cod_col and raw is not None:
+                try:
+                    if float(raw) > 9000:
+                        raw = None
+                except ValueError:
+                    pass
+
             cell = ws.cell(row=ri, column=ci, value=raw)
             cell.font   = Font(name="Arial", size=9, bold=True) 
             cell.border = brd
@@ -640,8 +648,7 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
                             
             elif col_name == pre_col:
                 cell.fill = PatternFill("solid", start_color=PRICE_BG)
-                if raw is not None:
-                    cell.number_format = '[$R$-pt-BR] #,##0.00'
+                cell.number_format = '[$R$-pt-BR] #,##0.00' # Formatação de moeda em toda a coluna
             
             else:
                 if ci > len(base_cols) and ci <= len(base_cols) + len(store_cols):
@@ -671,8 +678,8 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
         if col_name.strip() == "":
             ws.column_dimensions[get_column_letter(ci)].hidden = True
 
-    freeze_col = len(base_cols) + 1
-    ws.freeze_panes = f"{get_column_letter(freeze_col)}{DATA_START}"
+    # Congelar apenas a linha do cabeçalho
+    ws.freeze_panes = f"A{DATA_START}"
 
     ws.row_dimensions[1].height = 6   
     ws.row_dimensions[HEADER_ROW].height = 18
