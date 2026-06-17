@@ -303,14 +303,13 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 # VARIÁVEIS DAS ABAS (OFERTAS)
 WS_PRODUTOS = "Ofertas_Produtos"
 WS_PEDIDOS  = "Ofertas_Pedidos"
-WS_MEDIA_90 = "Ofertas_90d"  # <--- NOVA ABA ADICIONADA AQUI
+WS_MEDIA_90 = "Ofertas_90d"
 
 @st.cache_data(ttl=15)
 def carregar_banco():
     df_prod = conn.read(worksheet=WS_PRODUTOS)
     df_ped = conn.read(worksheet=WS_PEDIDOS)
     
-    # Carregamento seguro da nova aba de Médias
     try:
         df_media_90 = conn.read(worksheet=WS_MEDIA_90)
         if df_media_90.empty:
@@ -401,7 +400,7 @@ def carregar_banco():
     if mudou_algo:
         st.cache_data.clear()
 
-    return df_prod, df_ped, df_media_90  # Retornando a variável nova também
+    return df_prod, df_ped, df_media_90
 
 df_produtos, df_pedidos, df_media_90 = carregar_banco()
 
@@ -473,7 +472,7 @@ if st.session_state['usuario_logado'] is None:
 usuario_atual = st.session_state['usuario_logado']
 acesso_total  = usuario_atual == "Administrador"
 
-if not acesso_total:
+if not acceso_total:
     st.markdown("""
     <script>
         document.body.classList.add('sidebar-hidden');
@@ -551,7 +550,7 @@ with st.sidebar:
         st.rerun()
 
 # ─────────────────────────────────────────────
-# HELPER: gera o arquivo Excel formatado (ATUALIZADO)
+# HELPER: gera o arquivo Excel formatado (NOME UNIFICADO)
 # ─────────────────────────────────────────────
 def _gerar_excel_formatado(df_editado_admin, filtro_setor):
     HDR_BG    = "C55A11"   
@@ -561,7 +560,7 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
     TOTAL_BG  = "C6EFCE"   
     PRICE_BG  = "FCE4D6"   
 
-    thin = Side(style="thin", color="000000") # Borda preta
+    thin = Side(style="thin", color="000000") 
     brd  = Border(left=thin, right=thin, top=thin, bottom=thin)
 
     df_exp = df_editado_admin.copy()
@@ -571,7 +570,7 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
 
     if filtro_setor in ("Box", "Pedra"):
         df_exp = df_exp.rename(columns={
-            "Código":      "CODIGO", # Alterado de COD.ICEASA
+            "Código":      "CODIGO", 
             "Descrição":   "PRODUTOS MOLICENTER",
             "TOTAL GERAL": "TOTAL",
             "R$Preço":     "PREÇO",
@@ -600,7 +599,7 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
 
     wb = openpyxl.Workbook()
     ws = wb.active
-    ws.title = "PEDIDO BOX" # Alterado o nome da aba
+    ws.title = "PEDIDO BOX" 
 
     HEADER_ROW = 2    
     DATA_START  = 3
@@ -622,7 +621,6 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
             if raw == 0 or raw == 0.0 or str(raw).strip() in ("0", "0.0", "nan", ""):
                 raw = None
 
-            # Lógica para ocultar códigos acima de 9000
             if col_name == cod_col and raw is not None:
                 try:
                     if float(raw) > 9000:
@@ -648,7 +646,7 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
                             
             elif col_name == pre_col:
                 cell.fill = PatternFill("solid", start_color=PRICE_BG)
-                cell.number_format = '[$R$-pt-BR] #,##0.00' # Formatação de moeda em toda a coluna
+                cell.number_format = '[$R$-pt-BR] #,##0.00' 
             
             else:
                 if ci > len(base_cols) and ci <= len(base_cols) + len(store_cols):
@@ -678,7 +676,6 @@ def _gerar_excel_formatado(df_editado_admin, filtro_setor):
         if col_name.strip() == "":
             ws.column_dimensions[get_column_letter(ci)].hidden = True
 
-    # Congelar apenas a linha do cabeçalho
     ws.freeze_panes = f"A{DATA_START}"
 
     ws.row_dimensions[1].height = 6   
@@ -725,7 +722,6 @@ if perfil_navegacao == "Separação e Fechamento":
             df_final = df_final[df_final["Tipo"] == filtro_setor].reset_index(drop=True)
             df_final = df_final.drop(columns=["Tipo"])
 
-        # Oculta zeros no código Prime para estética
         df_final["Cód.Prime"] = df_final["Cód.Prime"].replace(0, None)
 
         col_cfg = {
@@ -749,7 +745,6 @@ if perfil_navegacao == "Separação e Fechamento":
             key=f"admin_editor_{st.session_state['reset_counter']}"
         )
         
-        # Oculta o Cód.Prime na hora da impressão para manter o padrão antigo
         df_imprimir = df_editado_admin.copy()
         df_imprimir = df_imprimir.drop(columns=["Cód.Prime"], errors="ignore")
         df_imprimir = df_imprimir.rename(columns={"Código": "Cód. Iceasa"})
@@ -786,11 +781,12 @@ if perfil_navegacao == "Separação e Fechamento":
             df_csv = df_csv.drop(columns=["Cód.Prime"], errors="ignore")
             df_csv = df_csv.rename(columns=MAPA_LOJAS)
             csv = df_csv.to_csv(index=False).encode("utf-8")
-            st.download_button("⬇️ CSV", data=csv, file_name="separacao_semanal_ofertas.csv", mime="text/csv", use_container_width=True)
+            st.download_button("⬇️ CSV", data=csv, file_name="molicenter.csv", mime="text/csv", use_container_width=True)
             
         with col_excel:
             excel_bytes = _gerar_excel_formatado(df_editado_admin, filtro_setor)
-            nome_arquivo_excel = f"separacao_ofertas_{filtro_setor.lower()}.xlsx" if filtro_setor != "Todos" else "separacao_semanal_ofertas.xlsx"
+            # Nome do arquivo unificado para apenas molicenter.xlsx
+            nome_arquivo_excel = "molicenter.xlsx" 
             st.download_button(
                 "⬇️ Excel",
                 data=excel_bytes,
@@ -842,7 +838,6 @@ elif perfil_navegacao == "Visão das Lojas":
     }
     cod_empresa_banco = mapa_banco_erp.get(loja_selecionada, "001")
 
-    # ------------------ ESTOQUE VIA POSTGRESQL ----------------------
     try:
         conn_pg = st.connection("banco_erp", type="sql")
         
@@ -871,23 +866,19 @@ elif perfil_navegacao == "Visão das Lojas":
         else:
              st.error(f"⚠️ Erro ao puxar dados do ERP: {e}")
         df_loja["Estoque"] = 0
-    # -----------------------------------------------------------------
 
     df_loja["Estoque"] = df_loja["Estoque"].fillna(0).astype(int)
     df_qtd = df_pedidos[["Código", loja_selecionada]].rename(columns={loja_selecionada: "Qtde"})
     df_loja = pd.merge(df_loja, df_qtd, on="Código", how="left")
     
-    # --- CRUZAMENTO DA MÉDIA 90 DIAS ---------------------------------
     df_media_loja = df_media_90[df_media_90['loja'].astype(str).str.zfill(3) == cod_empresa_banco.zfill(3)].copy()
     df_media_loja = df_media_loja.rename(columns={"codigo": "Cód.Prime", "qtde": "Média 90d"})
     df_media_loja["Cód.Prime"] = pd.to_numeric(df_media_loja["Cód.Prime"], errors='coerce').fillna(0).astype(int)
 
     df_loja = pd.merge(df_loja, df_media_loja[["Cód.Prime", "Média 90d"]], on="Cód.Prime", how="left")
     df_loja["Média 90d"] = df_loja["Média 90d"].fillna(0.0).round(2)
-    # -----------------------------------------------------------------
 
     df_loja["Cód.Prime"] = df_loja["Cód.Prime"].replace(0, None)
-    # 👇 ADICIONE ESTA LINHA AQUI 👇
     df_loja = df_loja[["Cód.Prime", "Código", "Descrição", "Tipo", "Estoque", "Média 90d", "Qtde"]]
 
     with st.container(border=True):
@@ -910,7 +901,6 @@ elif perfil_navegacao == "Visão das Lojas":
         df_imprimir = df_editado.copy()
         df_imprimir = df_imprimir.drop(columns=["Cód.Prime"], errors="ignore")
         df_imprimir["Código"] = df_imprimir["Código"].fillna(0).astype(int).astype(str)
-        # Renomeia para impressão. Adicionado Média
         df_imprimir = df_imprimir.rename(columns={"Código": "Cód", "Tipo": "Setor", "Estoque": "Est.", "Média 90d": "Média", "Qtde": "Ped."})
         df_imprimir = df_imprimir[["Cód", "Descrição", "Setor", "Est.", "Média", "Ped."]] 
         
@@ -1088,7 +1078,6 @@ elif perfil_navegacao == "Catálogo de Produtos":
     with st.container(border=True):
         st.caption("➕ Adicione produtos na última linha  •  🗑️ Selecione a linha e pressione **Delete** para remover  •  ✅ Checkboxes controlam visibilidade por loja")
         
-        # --- BOTOES ADICIONADOS AQUI ---
         col_btn1, col_btn2, col_info = st.columns([2.5, 2.5, 5])
         with col_btn1:
             btn_salvar = st.button("💾 Salvar Códigos e Catálogo", type="primary", use_container_width=True)
@@ -1097,19 +1086,15 @@ elif perfil_navegacao == "Catálogo de Produtos":
         with col_info:
             st.info("💡 Digite o Cód. ERP e salve, ou clique para extrair a Média de Vendas do ERP!")
 
-        # --- LÓGICA DE EXECUÇÃO DA QUERY ---
         if btn_atualizar_90d:
             with st.spinner("⏳ Extraindo vendas dos últimos 90 dias do ERP. Isso pode demorar alguns segundos..."):
                 try:
                     conn_pg = st.connection("banco_erp", type="sql")
-                    
                     query_90d = 'SELECT loja, codigo, qtde FROM "python_90dSEGTER"'
+                    df_nova_media = conn_pg.query(query_90d, ttl=0) 
                     
-                    df_nova_media = conn_pg.query(query_90d, ttl=0) # Força rodar na hora
-                    
-                    # Salva no Sheets
                     conn.update(worksheet=WS_MEDIA_90, data=df_nova_media)
-                    st.cache_data.clear() # Limpa cache pro sistema puxar da planilha
+                    st.cache_data.clear() 
                     
                     st.success("✅ Média de 90 dias calculada e salva no Google Sheets com sucesso!")
                 except Exception as e:
