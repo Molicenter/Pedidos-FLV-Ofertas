@@ -275,7 +275,6 @@ FORNECEDORES_ESPECIAIS_LINHA = ["BANANA SANTOME", "MELANCIA CARLIN", "MELANCIA M
 produtos_iniciais = [
     {"Cód.Prime": None, "Código": 1571, "Descrição": "Abacate Cx 20 Kg", "Tipo": "Box"},
     {"Cód.Prime": None, "Código": 2614, "Descrição": "Abacaxi Doce Mel Cx c/7", "Tipo": "Box"},
-    # ... os demais continuam iguais ...
     {"Cód.Prime": None, "Código": 67, "Descrição": "Vagem kg Cx 11kg", "Tipo": "Pedra"}
 ]
 
@@ -472,7 +471,7 @@ if st.session_state['usuario_logado'] is None:
 usuario_atual = st.session_state['usuario_logado']
 acesso_total  = usuario_atual == "Administrador"
 
-if not acceso_total:
+if not acesso_total:
     st.markdown("""
     <script>
         document.body.classList.add('sidebar-hidden');
